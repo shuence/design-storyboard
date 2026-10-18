@@ -20,8 +20,8 @@ powers both platforms:
 
 | Allowed | Forbidden |
 |---|---|
-| `<path d>` with fills | `<text>` - no text in illustrations, ever |
-| `stroke` with round caps/joins | CSS in `<style>` - inline attributes only |
+| `<path d>` with fills | `<text>`, no text in illustrations, ever |
+| `stroke` with round caps/joins | CSS in `<style>`, inline attributes only |
 | `fill-opacity`, `stroke-opacity` | Multi-stop gradients, `<mask>`, `<filter>` |
 | Group transform: translate, scale, rotate | `clip-path`, non-uniform scale |
 | `fill-rule="evenodd"` | `<use>` with complex inheritance |
@@ -72,7 +72,7 @@ give the composition a `currentColor`-style slot or a `data-theme` variant in th
 needs genuinely different values.
 
 ### Name by moment, not by object
-`illustration_paired`, `illustration_welcome`, `illustration_bucket` - the name should map to the
+`illustration_paired`, `illustration_welcome`, `illustration_bucket`: the name should map to the
 screen moment it serves, not the shape it draws. `illustration_circle_v2` is unsearchable.
 
 ---

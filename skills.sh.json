@@ -4,7 +4,7 @@
   "groupings": [
     {
       "title": "The skill",
-      "description": "Build a whole design/ folder — storyboard, mockups, icons, landing page, store kit — from one tokens.json.",
+      "description": "Build a whole design/ folder from one tokens.json: storyboard, mockups, icons, landing page, store kit.",
       "skills": ["design-storyboard"]
     },
     {

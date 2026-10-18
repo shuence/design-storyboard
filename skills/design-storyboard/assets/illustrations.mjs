@@ -46,7 +46,7 @@ const C = {
 };
 
 // ============================================================================
-// Geometry helpers - every shape is a function returning path data.
+// Geometry helpers: every shape is a function returning path data.
 // ============================================================================
 
 const n = (v) => +v.toFixed(2);

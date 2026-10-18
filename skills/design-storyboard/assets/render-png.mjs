@@ -2,7 +2,7 @@
 // Rasterise one SVG or HTML artboard to PNG.
 //   node render-png.mjs <in.svg|in.html> <out.png> --width 1280 --height 800
 // SVG tries ImageMagick (`magick`) first. HTML uses headless Chrome.
-// iOS app icons do not use this - app-icons.mjs writes those PNGs itself.
+// iOS app icons do not use this; app-icons.mjs writes those PNGs itself.
 
 import { execFileSync } from "node:child_process";
 import { existsSync } from "node:fs";

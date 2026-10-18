@@ -22,7 +22,7 @@ One job, named before you write a line:
 
 If the page tries to do two, the hero will say neither well. Pick one; put the second in the footer.
 
-**One primary CTA.** It appears in the hero, again after the proof section, and once at the end. Secondary actions are text links, not buttons - a page with two equal buttons has no call to action.
+**One primary CTA.** It appears in the hero, again after the proof section, and once at the end. Secondary actions are text links, not buttons: a page with two equal buttons has no call to action.
 
 ---
 
@@ -35,7 +35,7 @@ The order is not decoration. Each section answers the question the previous one 
 2  Proof strip     logos, numbers, ratings, or a single hard claim
 3  The problem     the status quo, in the user's words
 4  How it works    3 steps, one sentence each
-5  The payoff      what they get back - the section that converts
+5  The payoff      what they get back: the section that converts
 6  Objections      1 section each: price, privacy, effort, switching cost
 7  Social proof    quotes with a name and a face, or nothing
 8  Pricing         (if it has a price) or a single honest "free" line
@@ -84,10 +84,10 @@ Read the whole page aloud. If a sentence couldn't be said to a friend, cut it.
 Every page ships these, or it will look broken when shared:
 
 ```html
-<title>App - the promise, in a few words</title>
+<title>App: the promise, in a few words</title>
 <meta name="description" content="One sentence, ≤ 155 chars, with the outcome and the audience.">
 <link rel="canonical" href="https://example.com/">
-<meta property="og:title"       content="App - the promise">
+<meta property="og:title"       content="App: the promise">
 <meta property="og:description" content="Same sentence, no truncation surprises.">
 <meta property="og:image"       content="https://example.com/og.png">
 <meta property="og:image:width"  content="1200">
@@ -100,7 +100,7 @@ Every page ships these, or it will look broken when shared:
 Plus:
 - **OG image rendered from code**, not hand-made: `redesign/og.html` at 1200 × 628, screenshotted by the same headless-Chrome pass as the store kit. It stays in sync automatically.
 - **JSON-LD** for the product/app (`SoftwareApplication` or `MobileApplication`) with name, description, operatingSystem, offers, and `aggregateRating` only if real.
-- **`lang` on `<html>`**, and a real `<h1>` - one per page.
+- **`lang` on `<html>`**, and a real `<h1>`, one per page.
 - Favicon must survive 16 px. Test it in a tab, not at 512.
 
 ---
@@ -112,7 +112,7 @@ The landing page is the one page that gets judged on a cold 4G phone.
 | Budget | Target |
 |---|---|
 | LCP | < 2.5 s on a simulated 4G |
-| CLS | < 0.1 - reserve space for every image and embed |
+| CLS | < 0.1, reserve space for every image and embed |
 | INP | < 200 ms |
 | JS shipped | ideally 0; hard cap ~50 KB for a marketing page |
 | Images | AVIF/WebP, `width`/`height` set, `loading="lazy"` below the fold, hero preloaded |
@@ -147,7 +147,7 @@ No PII, no email in event properties. If analytics is consent-gated, wire the ga
 
 Static output is enough: one HTML file, one CSS block, a few images, the OG card. That means:
 - `python3 -m http.server` locally; any static host in production (Vercel, Netlify, Cloudflare Pages, GitHub Pages).
-- No build step is a feature - the design folder must render offline with `file://`.
+- No build step is a feature: the design folder must render offline with `file://`.
 - If fonts or images are remote, note the network dependency in `store/README.md` so a bad offline render isn't a mystery.
 
 ---
@@ -160,7 +160,7 @@ Static output is enough: one HTML file, one CSS block, a few images, the OG card
 - [ ] Every section answers a question the previous section raised
 - [ ] At least one piece of real proof (or a verifiable specific claim)
 - [ ] Screenshots are real, current, and match the shipped app
-- [ ] `Live`/`Planned` discipline carries over - no marketing a feature that isn't shipped
+- [ ] `Live`/`Planned` discipline carries over, no marketing a feature that isn't shipped
 - [ ] All metadata present; OG card renders at 1200 × 628
 - [ ] Favicon legible at 16 px
 - [ ] Loads with JS disabled (content and CTA still work)

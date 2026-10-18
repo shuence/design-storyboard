@@ -30,7 +30,7 @@ Each figure has:
 - A device frame with the platform chrome from the reference (punch-hole or Dynamic Island, 9:41, correct battery side).
 - Real markup from the shared component CSS. A screen may add a local class only for something that component CSS cannot do.
 - Real copy from [concepts/voice/SKILL.md](../voice/SKILL.md). No lorem, no "John Doe", no "42" unless 42 is the real number.
-- A caption: title, `Live` or `Planned`, and why the screen exists - the user problem, one sentence.
+- A caption: title, `Live` or `Planned`, and why the screen exists: the user problem, one sentence.
 - One job. One primary action in the thumb zone.
 
 Include the states or the board is a pitch, not a design: empty, loading, error (keeps their input, names the fix), offline, permission denied, long content, dark mode. Paywall, upgrade, and restore only if the business model touches the UI.

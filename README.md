@@ -52,7 +52,7 @@ npx skills add shuence/design-storyboard
 
 That finds your agents and wires the skill into each one. `skills add` also lists it on [skills.sh](https://skills.sh/shuence/design-storyboard).
 
-**Or manually** - drop it where your agent looks for skills:
+**Or manually**: drop it where your agent looks for skills:
 
 ```bash
 git clone --depth 1 https://github.com/shuence/design-storyboard.git /tmp/ds
@@ -80,7 +80,7 @@ Eleven phases, with two deliberate stops.
 
 | # | Phase | Output |
 |---|---|---|
-| 00 | **Interview** | Product, audience, moment of use, must-nevers, platforms, competitors - then direction questions |
+| 00 | **Interview** | Product, audience, moment of use, must-nevers, platforms, competitors, then direction questions |
 | 01 | **Orient** | Read what exists; inventory what's reusable vs. what must be invented |
 | 02 | **Three directions** | Same screens, three real type-and-colour systems. **You pick one.** |
 | 03 | **Tokens + gate** | W3C DTCG tokens, then the contrast checker must exit `0` |
@@ -133,7 +133,7 @@ skills/design-storyboard/
     └── design-board.html       store review board skeleton
 ```
 
-The `assets/` scripts are real, runnable templates - not pseudocode. Point them at a `tokens.json` and they emit SVG, `.appiconset`, VectorDrawable, and `mipmap-anydpi` XML.
+The `assets/` scripts are real, runnable templates, not pseudocode. Point them at a `tokens.json` and they emit SVG, `.appiconset`, VectorDrawable, and `mipmap-anydpi` XML.
 
 `assets/generated/` holds the output used on the launch page: four launcher variants and four illustrations produced by those scripts, so the page shows real artifacts instead of drawings of artifacts.
 
@@ -145,7 +145,7 @@ The `assets/` scripts are real, runnable templates - not pseudocode. Point them 
 - Google Chrome for store screenshots and the OG card
 - Optional: ImageMagick (`magick`) to rasterise and verify icon sizes
 
-No npm install. No build step. The design folder has to render offline with `file://` - that's a feature.
+No npm install. No build step. The design folder has to render offline with `file://`. That's a feature.
 
 ---
 
@@ -161,7 +161,7 @@ No npm install. No build step. The design folder has to render offline with `fil
 
 ## Docs
 
-- [Naming research](docs/NAMING_RESEARCH.md) - what the installed-skill ecosystem actually names things, and why this is called `design-storyboard`
+- [Naming research](docs/NAMING_RESEARCH.md): what the installed-skill ecosystem actually names things, and why this is called `design-storyboard`
 
 ---
 

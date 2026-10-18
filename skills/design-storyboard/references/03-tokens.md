@@ -95,7 +95,7 @@ file, platform window/launch colour resources, and the asset generators.
 If the accent colour may only be used for emphasis and one gradient, put that in the token's
 `$description`. Undocumented reservations do not survive contact with a second designer.
 
-**Pattern worth copying** - primary actions are *ink*, not the accent:
+**Pattern worth copying**: primary actions are *ink*, not the accent:
 > `actionPrimary` is ink, not rose: rose is reserved for accent text and the glow.
 
 This is the single highest-leverage decision in a one-accent system. The accent stays special
@@ -122,7 +122,7 @@ longer than `gentle` needs a reason and a reduced-motion path.
 ## The contrast gate
 
 `check-contrast.mjs` resolves `{dot.path}` aliases, computes WCAG 2.x relative luminance, and
-checks every pair in both modes. Exit code 1 on any failure - wire it into CI.
+checks every pair in both modes. Exit code 1 on any failure. Wire it into CI.
 
 Minimums:
 | Pair kind | Min |
@@ -160,6 +160,6 @@ Generate, don't retype:
 |---|---|
 | Kotlin | `android/app/src/main/java/<app>/core/design/<App>Tokens.kt` (+ `Type.kt`, `Theme.kt`) |
 | Swift | `ios/<App>/Core/DesignSystem/<App>Tokens.swift` |
-| Docs | `docs/DESIGN_SYSTEM.md` - palette table, semantic table, the accent reservation, the glow spec |
+| Docs | `docs/DESIGN_SYSTEM.md`: palette table, semantic table, the accent reservation, the glow spec |
 
 Then add a check: grep the UI source for hex literals. Zero hits outside the token files.

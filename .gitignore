@@ -8,4 +8,4 @@ node_modules/
 tmp/
 
 # scratch: launch prototypes, not shipped
-launch/_proto/
+launch/

@@ -1,7 +1,7 @@
 # 08 · Content packs (copy decks)
 
-If the app shows the user *content* - questions, prompts, tips, exercises, notification lines,
-microcopy - the design folder owns that deck, alongside the tokens. Copy is a design material: it
+If the app shows the user *content* (questions, prompts, tips, exercises, notification lines,
+microcopy), the design folder owns that deck, alongside the tokens. Copy is a design material: it
 sets line length, card height and the type scale's stress test.
 
 ```
@@ -14,7 +14,7 @@ design/question-packs/
 
 ---
 
-## `packs.json` - the index
+## `packs.json`: the index
 
 ```json
 {
@@ -36,7 +36,7 @@ Rules:
   row.
 - **Version the index.** Content decks change; a version number lets a migration be reasoned about.
 
-## `<pack>.json` - the pack
+## `<pack>.json`: the pack
 
 Keep one flat, obvious shape:
 
@@ -55,7 +55,7 @@ Keep one flat, obvious shape:
 
 - **Stable ids per item** (`<pack>-NN`) so analytics, favourites and saved answers survive an edit.
 - **`tier` or `intensity`** lets the app pace the deck instead of dumping everything.
-- **Optional fields are optional** - don't stub `followUp: ""` everywhere; it makes the real ones
+- **Optional fields are optional**: don't stub `followUp: ""` everywhere; it makes the real ones
   invisible.
 
 ---
@@ -79,12 +79,12 @@ supported language. Overflow is a design bug the copy deck hides.
 ---
 
 ## Related decks worth putting here
-- **Notification lines** - the words on a push. Same tone rules; the most-seen copy in the product.
-- **Empty-state copy** - pairs with every illustration in [`06-illustrations.md`](06-illustrations.md).
-- **Onboarding microcopy** - the first five strings a user ever reads.
-- **Error copy** - what went wrong, what to do, no blame.
+- **Notification lines**: the words on a push. Same tone rules; the most-seen copy in the product.
+- **Empty-state copy**: pairs with every illustration in [`06-illustrations.md`](06-illustrations.md).
+- **Onboarding microcopy**: the first five strings a user ever reads.
+- **Error copy**: what went wrong, what to do, no blame.
 
-These can live as `design/question-packs/*.json` siblings or as a `copy/` folder - but they belong
+These can live as `design/question-packs/*.json` siblings or as a `copy/` folder, but they belong
 in `design/`, not scattered into platform string files first. Platform strings are generated or
 translated *from* here.
 

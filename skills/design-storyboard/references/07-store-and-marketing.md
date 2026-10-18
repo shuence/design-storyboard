@@ -29,7 +29,7 @@ drifts from the app is worse than no kit.
 | TV banner | 1280 × 720 | only for TV |
 | Short description | ≤ 80 chars | truncation is real; test it |
 
-*(Verify current requirements at build time - both stores change them. If a size is uncertain, ask
+*(Verify current requirements at build time: both stores change them. If a size is uncertain, ask
 the user rather than guessing silently.)*
 
 ---
@@ -60,8 +60,8 @@ if __name__ == "__main__": main()
 ```
 
 Two modes of artboard:
-- **Framed** - headline + device, on a tinted ground. Good for "what it is".
-- **Full-bleed** - the screen cropped to the top ~70% of the board, bleeding off the edges. Only use
+- **Framed**: headline + device, on a tinted ground. Good for "what it is".
+- **Full-bleed**: the screen cropped to the top ~70% of the board, bleeding off the edges. Only use
   for a screen whose point lands inside that band; check the bottom of the content is inside the
   crop before shipping.
 
@@ -82,7 +82,7 @@ being surprised by a bad render.
 ## Platform chrome
 
 `app.html` draws **one** generic status bar, because it's a design document. On a store listing the
-bar is a *claim* - "this is the Android app", "this is the iPhone app" - so the store pipeline adds
+bar is a *claim* ("this is the Android app", "this is the iPhone app"), so the store pipeline adds
 the real thing.
 
 | | Cut-out | Right-hand icons |
@@ -95,7 +95,7 @@ Clock stays `9:41` on both. Drive the differences with `data-device` / `data-for
 artboard HTML stays one template.
 
 Also store-only: the launcher ground behind a widget board. If the app's real wallpaper gradient reads
-dirty behind porcelain widgets, override it **in `STORE_CSS` only** - never change the app to suit a
+dirty behind porcelain widgets, override it **in `STORE_CSS` only**, never change the app to suit a
 screenshot.
 
 ---
@@ -104,17 +104,17 @@ screenshot.
 
 2–8 screenshots are a pitch, not an inventory. Sequence:
 
-1. **The promise** - what it is, in one line. Often not a screenshot at all.
-2. **The core loop** - the thing you do daily.
-3. **The payoff** - what you get back. This is the one that converts.
-4. **The private/safe angle** - if trust is a differentiator.
-5. **The breadth** - a second surface (widget, share, plan).
+1. **The promise**: what it is, in one line. Often not a screenshot at all.
+2. **The core loop**: the thing you do daily.
+3. **The payoff**: what you get back. This is the one that converts.
+4. **The private/safe angle**: if trust is a differentiator.
+5. **The breadth**: a second surface (widget, share, plan).
 6. **Privacy / no-ads / no-dark-patterns**, as a claim.
 
 Rules:
 - One headline per board, 3–6 words, sentence case, no exclamation marks.
 - Headline in the display face, supporting line in the UI face, one accent word at most.
-- No marketing chrome floating over a real screenshot - no fake buttons, no fake ratings.
+- No marketing chrome floating over a real screenshot: no fake buttons, no fake ratings.
 - The story must survive being viewed as thumbnails at ~200 px wide.
 
 ---
@@ -134,9 +134,9 @@ line of copy, no device frame.
 
 ## Review page and README
 
-- **`store/design-board.html`** - every asset on one page, with the wordmark spec and the icon at
+- **`store/design-board.html`**: every asset on one page, with the wordmark spec and the icon at
   real sizes. Generated (`build/design_board.py`) so it cannot go stale. This is the page you show.
-- **`store/README.md`** - must contain: the brand definition table (wordmark + icon, each with a
+- **`store/README.md`** must contain: the brand definition table (wordmark + icon, each with a
   source-of-truth link), the required-sizes table, both regenerate commands, and the platform-chrome
   notes.
 

@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>design-storyboard - OG card</title>
+<title>design-storyboard: OG card</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&display=swap" rel="stylesheet">
 <style>
-  /* Tokens mirrored from the skill's own design/tokens.json - paper, ink, rose. */
+  /* Tokens mirrored from the skill's own design/tokens.json: paper, ink, rose. */
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{width:1200px;height:628px;overflow:hidden}
   body{
@@ -19,7 +19,9 @@
   .serif{font-family:"Newsreader",Georgia,serif;font-weight:400;letter-spacing:-.025em}
 
   .top{display:flex;align-items:center;justify-content:space-between}
-  .mark{font-size:17px;font-weight:600;letter-spacing:-.03em}
+  .brandlock{display:inline-flex;align-items:center;gap:10px}
+  .brandlock svg{display:block;width:34px;height:34px;flex:none}
+  .mark{font-size:18px;font-weight:600;letter-spacing:-.03em}
   .mark span{color:#C93C55}
   .kicker{font-size:12.5px;color:#8F8782}
 
@@ -75,14 +77,17 @@
 <body>
 
   <div class="top">
-    <div class="mark">design<span>–</span>storyboard</div>
+    <div class="brandlock">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><rect width="100" height="100" rx="22.5" fill="#151312"/><g transform="translate(50 50)"><path d="M0 0 C11 -11.2 12.32 -28 0 -40 C-12.32 -28 -11 -11.2 0 0 Z" fill="#FAF9F7" transform="rotate(0)"/><path d="M0 0 C11 -11.2 12.32 -28 0 -40 C-12.32 -28 -11 -11.2 0 0 Z" fill="#FAF9F7" transform="rotate(72)"/><path d="M0 0 C11 -11.2 12.32 -28 0 -40 C-12.32 -28 -11 -11.2 0 0 Z" fill="#FAF9F7" transform="rotate(144)"/><path d="M0 0 C11 -11.2 12.32 -28 0 -40 C-12.32 -28 -11 -11.2 0 0 Z" fill="#FAF9F7" transform="rotate(216)"/><path d="M0 0 C11 -11.2 12.32 -28 0 -40 C-12.32 -28 -11 -11.2 0 0 Z" fill="#FAF9F7" transform="rotate(288)"/><circle r="9" fill="#C93C55"/></g></svg>
+      <div class="mark">design<span>–</span>storyboard</div>
+    </div>
     <div class="kicker">An agent skill for people who ship apps</div>
   </div>
 
   <div class="main">
     <div>
       <h1 class="serif">Your app deserves a <em>design folder</em>.</h1>
-      <p>Storyboard, hi-fi mockups, <b>landing page</b>, logo, launcher icons, illustrations and store kit - generated from one tokens file.</p>
+      <p>Storyboard, hi-fi mockups, <b>landing page</b>, logo, launcher icons, illustrations and store kit, generated from one tokens file.</p>
     </div>
 
     <div class="phones">

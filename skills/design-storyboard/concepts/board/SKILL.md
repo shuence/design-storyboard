@@ -13,16 +13,16 @@ Template to start from: [assets/design-board.html](../../assets/design-board.htm
 
 Sticky nav with a count of generated assets.
 
-1. **App icon** - the kept mark, inlined from `app-icons/default.svg`, at 16 / 32 / 64 / 128 / 1024, light and dark. Then "Drawn and not adopted", one line each.
-2. **Wordmark** - the one lockup, the spec (family, weight, tracking, casing, stop), clear space.
-3. **Colour** - swatches and role sentences from `tokens.json`, including dark.
-4. **Type** - display, title, body, caption, wordmark, in the real families, set in real copy.
-5. **Screens** - store screenshots in order, one claim each. Link `../redesign/app.html` for the full storyboard. Do not paste every app state here.
-6. **Illustrations** - the review SVGs, if the direction uses them.
-7. **Marketing** - feature graphic and the sizes [references/07-store-and-marketing.md](../../references/07-store-and-marketing.md) required.
-8. **Never** - stretched, rotated, shadow, recoloured.
-9. **Spec sheet** - folder, pixel size, file count, required or optional.
-10. **Sources** - links to `tokens.json`, `app.html`, `landing.html`, `logo-icon.html`, the generators.
+1. **App icon**: the kept mark, inlined from `app-icons/default.svg`, at 16 / 32 / 64 / 128 / 1024, light and dark. Then "Drawn and not adopted", one line each.
+2. **Wordmark**: the one lockup, the spec (family, weight, tracking, casing, stop), clear space.
+3. **Colour**: swatches and role sentences from `tokens.json`, including dark.
+4. **Type**: display, title, body, caption, wordmark, in the real families, set in real copy.
+5. **Screens**: store screenshots in order, one claim each. Link `../redesign/app.html` for the full storyboard. Do not paste every app state here.
+6. **Illustrations**: the review SVGs, if the direction uses them.
+7. **Marketing**: feature graphic and the sizes [references/07-store-and-marketing.md](../../references/07-store-and-marketing.md) required.
+8. **Never**: stretched, rotated, shadow, recoloured.
+9. **Spec sheet**: folder, pixel size, file count, required or optional.
+10. **Sources**: links to `tokens.json`, `app.html`, `landing.html`, `logo-icon.html`, the generators.
 
 Header states the promise the way the interview locked it, and names the regenerate command. Footer repeats the command.
 
@@ -30,4 +30,4 @@ Decisions from `DIRECTION.md` appear as one line under the section they changed.
 
 ## Done
 
-Open the file. The icon is the file `app-icons.mjs` wrote. The type is the family in `tokens.json`. The screenshot row is empty only if store renders have not been run - say that, and leave the slots labelled, rather than dropping in a fake UI.
+Open the file. The icon is the file `app-icons.mjs` wrote. The type is the family in `tokens.json`. The screenshot row is empty only if store renders have not been run. Say that, and leave the slots labelled, rather than dropping in a fake UI.

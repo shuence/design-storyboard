@@ -49,15 +49,15 @@ Color names ("blue means trust") are not principles. Colour meaning is cultural 
 
 Norman's three levels, mapped to the interview:
 
-- **Visceral** - the first 10 seconds. Type, temperature, density, and motion must produce the three adjectives and must not produce the banned one.
-- **Behavioural** - the job completes with no puzzle. Speed, forgiveness, obvious primary action.
-- **Reflective** - the peak moment and the last screen are designed on purpose (peak–end). A success, a goodbye, a saved state. Not a dead end.
+- **Visceral**: the first 10 seconds. Type, temperature, density, and motion must produce the three adjectives and must not produce the banned one.
+- **Behavioural**: the job completes with no puzzle. Speed, forgiveness, obvious primary action.
+- **Reflective**: the peak moment and the last screen are designed on purpose (peak–end). A success, a goodbye, a saved state. Not a dead end.
 
 | Signal from the interview | Constrain |
 |---|---|
 | Quiet, calm, considered | Low chroma, long line-height, no badges, no count-up, motion stays under `standard`. |
 | Urgent, operational | High contrast, tabular numbers, status colour only for status, density up, motion `quick` only. |
-| Warm, human | Warm paper, humanist or serif display, real names, illustrations of people or objects - not abstract blobs - if illustration is allowed. |
+| Warm, human | Warm paper, humanist or serif display, real names, illustrations of people or objects (not abstract blobs) if illustration is allowed. |
 | Precise, technical | One grotesque, a mono for data, sharp or small radius, no gradient hero. |
 | Must never guilt, streak, or gamify | No incomplete-ring nag, no red badge for inactivity, no "don't break the chain". Zeigarnik progress is allowed only when finishing is the user's job (a form, a setup), and it ends. |
 
