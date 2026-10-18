@@ -24,7 +24,7 @@
 <style>
   /* =====================================================================
      BLOCK 1: TOKENS
-     Mirrored from momo design/tokens.json (direction B, "Quiet luxury").
+     Mirrored from a design/tokens.json (direction B, "Quiet luxury").
      No value here is invented. If one is missing, add it to the tokens
      first and regenerate, do not type a new hex into this file.
      ===================================================================== */
@@ -129,11 +129,13 @@
     border-bottom:1px solid var(--line);
   }
   .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:70px;gap:26px}
-  .wordmark{
-    display:inline-flex;align-items:center;gap:9px;
-    font-family:var(--ui);font-size:15px;font-weight:600;letter-spacing:-.03em;white-space:nowrap;
+  .wordmark{font-family:var(--ui);font-size:15px;font-weight:600;letter-spacing:-.03em;white-space:nowrap}
+  /* The mark is never inlined here — it is the generated favicon.svg, so the
+     nav cannot drift from the file node scripts/brand.mjs writes. */
+  .wordmark img{
+    display:inline-block;width:22px;height:22px;vertical-align:-5px;
+    margin-right:8px;border-radius:22.5%;
   }
-  .wordmark svg{display:block;width:22px;height:22px;flex:none}
   .wordmark span{color:var(--rose)}
   .nav-links{display:flex;align-items:center;gap:30px;font-size:13.5px;color:var(--ink2)}
   .nav-links a{transition:color .15s ease;white-space:nowrap}
@@ -147,6 +149,14 @@
   .nav-cta:hover{transform:translateY(-1px);box-shadow:0 10px 24px -14px rgba(21,19,18,.6)}
   .nav-cta .arrow{transition:transform .18s ease}
   .nav-cta:hover .arrow{transform:translate(2px,-2px)}
+  .reg{
+    display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 13px;
+    border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);background:var(--white);
+    font-size:12.5px;font-weight:500;letter-spacing:-.01em;color:var(--ink2);white-space:nowrap;
+    transition:box-shadow .18s ease, color .15s ease;
+  }
+  .reg:hover{color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink3)}
+  .reg i{width:5px;height:5px;border-radius:50%;background:var(--rose);flex:none}
   @media (max-width:840px){ .nav-links a{display:none} }
 
   /* =====================================================================
@@ -159,6 +169,9 @@
   .hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
   .hero-note{margin-top:22px;font-size:12.5px;line-height:1.6;color:var(--ink3)}
   .hero-note b{color:var(--ink2);font-weight:500}
+  .hero-note a{color:var(--ink2);text-decoration:underline;text-underline-offset:2px}
+  .hero-note a:hover{color:var(--ink)}
+  .hero-cmd{margin-top:28px;max-width:430px}
 
   .btn{
     display:inline-flex;align-items:center;justify-content:center;gap:9px;
@@ -246,6 +259,8 @@
   .proof-inner{display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap}
   .proof-item{display:flex;align-items:baseline;gap:9px;font-size:13px;color:var(--ink2)}
   .proof-item b{font-family:var(--serif);font-size:21px;font-weight:400;color:var(--ink);letter-spacing:-.02em}
+  .proof-item:hover{color:var(--ink)}
+  .proof-item:hover b{color:var(--rose)}
 
   /* =====================================================================
      BLOCK 6: THE RULE
@@ -378,6 +393,7 @@
   }
   .install-card h4{font-family:var(--ui);font-size:12px;font-weight:600;color:var(--ink3);margin-bottom:13px}
   .install-card p{font-size:13px;line-height:1.55;color:var(--ink2);margin-bottom:16px}
+  .install-card p a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
   .cmd{
     position:relative;background:var(--ink);color:#EDE7E3;border-radius:var(--r-sm);
     padding:14px 46px 14px 14px;font-family:var(--mono);font-size:11.5px;line-height:1.8;
@@ -408,6 +424,7 @@
   details[open] summary::after{content:"–"}
   details p{margin-top:13px;font-size:14.5px;line-height:1.62;color:var(--ink2);max-width:66ch}
   details p code{font-family:var(--mono);font-size:12.5px;background:var(--soft);padding:1px 5px;border-radius:5px}
+  details p a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
 
   /* =====================================================================
      BLOCK 15: FINAL + FOOTER
@@ -465,7 +482,7 @@
 <header class="nav">
   <div class="wrap">
     <a class="wordmark" href="#top">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><g transform="translate(50 50)"><path d="M0 0 C11 -11.2 12.32 -28 0 -40 C-12.32 -28 -11 -11.2 0 0 Z" fill="#151312" transform="rotate(0)"/><path d="M0 0 C11 -11.2 12.32 -28 0 -40 C-12.32 -28 -11 -11.2 0 0 Z" fill="#151312" transform="rotate(72)"/><path d="M0 0 C11 -11.2 12.32 -28 0 -40 C-12.32 -28 -11 -11.2 0 0 Z" fill="#151312" transform="rotate(144)"/><path d="M0 0 C11 -11.2 12.32 -28 0 -40 C-12.32 -28 -11 -11.2 0 0 Z" fill="#151312" transform="rotate(216)"/><path d="M0 0 C11 -11.2 12.32 -28 0 -40 C-12.32 -28 -11 -11.2 0 0 Z" fill="#151312" transform="rotate(288)"/><circle r="9" fill="#C93C55"/></g></svg>
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><g transform="translate(50 50) scale(1)"><path d="M0 0 C12.5 -10.5 14.5 -24 7.5 -34.5 C4.2 -39.2 -4.2 -39.2 -7.5 -34.5 C-14.5 -24 -12.5 -10.5 0 0 Z" fill="#151312" transform="rotate(0)"/><path d="M0 0 C12.5 -10.5 14.5 -24 7.5 -34.5 C4.2 -39.2 -4.2 -39.2 -7.5 -34.5 C-14.5 -24 -12.5 -10.5 0 0 Z" fill="#151312" transform="rotate(72)"/><path d="M0 0 C12.5 -10.5 14.5 -24 7.5 -34.5 C4.2 -39.2 -4.2 -39.2 -7.5 -34.5 C-14.5 -24 -12.5 -10.5 0 0 Z" fill="#151312" transform="rotate(144)"/><path d="M0 0 C12.5 -10.5 14.5 -24 7.5 -34.5 C4.2 -39.2 -4.2 -39.2 -7.5 -34.5 C-14.5 -24 -12.5 -10.5 0 0 Z" fill="#151312" transform="rotate(216)"/><path d="M0 0 C12.5 -10.5 14.5 -24 7.5 -34.5 C4.2 -39.2 -4.2 -39.2 -7.5 -34.5 C-14.5 -24 -12.5 -10.5 0 0 Z" fill="#151312" transform="rotate(288)"/><circle r="8.4" fill="#C93C55"/></g></svg>
       design<span>–</span>storyboard
     </a>
     <nav class="nav-links">
@@ -475,8 +492,11 @@
       <a href="#install">Install</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a class="nav-cta" href="https://github.com/shuence/design-storyboard">
-      GitHub <span class="arrow">↗</span>
+    <a class="reg" href="https://skills.sh/shuence/design-storyboard" title="Listed on skills.sh">
+      <i></i>skills.sh
+    </a>
+    <a class="nav-cta" href="https://skills.sh/shuence/design-storyboard">
+      Install <span class="arrow">↗</span>
     </a>
   </div>
 </header>
@@ -496,10 +516,11 @@
         </p>
         <div class="hero-actions">
           <a class="btn primary" href="#install">Install the skill <span class="arrow">→</span></a>
-          <a class="btn ghost" href="#build">See what it builds</a>
+          <a class="btn ghost" href="https://skills.sh/shuence/design-storyboard">View on skills.sh <span class="arrow">↗</span></a>
         </div>
+        <div class="cmd hero-cmd"><button class="copy" data-copy="npx skills add shuence/design-storyboard">copy</button>npx skills add shuence/design-storyboard</div>
         <p class="hero-note">
-          Claude Code · Codex · OpenCode · Cursor: needs <b>Node</b> and <b>Chrome</b>. Nothing else.
+          Listed on <a href="https://skills.sh/shuence/design-storyboard">skills.sh</a>. Claude Code · Codex · OpenCode · Cursor: needs <b>Node</b> and <b>Chrome</b>. Nothing else.
         </p>
       </div>
 
@@ -576,6 +597,7 @@
         <div class="proof-item"><b>10</b> concept files</div>
         <div class="proof-item"><b>10</b> folder artifacts</div>
         <div class="proof-item"><b>0</b> hand-drawn files</div>
+        <a class="proof-item" href="https://skills.sh/shuence/design-storyboard" title="npx skills add shuence/design-storyboard"><b>1</b> command install, on skills.sh</a>
       </div>
     </div>
   </div>
@@ -829,13 +851,13 @@
   <section class="rule">
     <div class="reveal" style="max-width:42ch">
       <p class="eyebrow">Install</p>
-      <h2>Three ways in, one of them is a sentence.</h2>
+      <h2>Four ways in, one of them is a sentence.</h2>
     </div>
 
     <div class="install-grid">
       <div class="install-card reveal" style="grid-column:1/-1">
         <h4>The one command</h4>
-        <p>Install it from the <span class="mono">skills.sh</span> registry. It wires the skill into every agent it finds.</p>
+        <p>Install it from the <a href="https://skills.sh/shuence/design-storyboard">skills.sh</a> registry. It wires the skill into every agent it finds, and keeps it updatable with <span class="mono">npx skills update</span>.</p>
         <div class="cmd"><button class="copy" data-copy="npx skills add shuence/design-storyboard">copy</button>npx skills add shuence/design-storyboard</div>
       </div>
 
@@ -877,6 +899,10 @@ cp -R /tmp/ds/skills/design-storyboard ~/.agents/skills/</div>
       </div>
       <div>
         <details>
+          <summary>How do I install it?</summary>
+          <p>One command: <code>npx skills add shuence/design-storyboard</code>. It detects your agents and installs into each one. The skill is listed on <a href="https://skills.sh/shuence/design-storyboard">skills.sh</a>, so <code>npx skills update</code> keeps it current. If you would rather not use the registry, clone the repo and copy <code>skills/design-storyboard</code> into <code>~/.agents/skills/</code> by hand.</p>
+        </details>
+        <details>
           <summary>Is this a Figma replacement?</summary>
           <p>No. Figma is where you explore with a team. This is where a design becomes buildable: tokens, real CSS, platform assets and a gate that fails CI. It's the folder you keep after the exploration is done.</p>
         </details>
@@ -902,7 +928,7 @@ cp -R /tmp/ds/skills/design-storyboard ~/.agents/skills/</div>
         </details>
         <details>
           <summary>Which agents can run it?</summary>
-          <p>Any agent that can read files and run Node: Claude Code, Codex, OpenCode, Cursor, Windsurf. The skill is just markdown plus three small scripts. There is no plugin API to depend on.</p>
+          <p>Any agent that can read files and run Node: Claude Code, Codex, OpenCode, Cursor, Windsurf. The skill is just markdown plus three small scripts. There is no plugin API to depend on. <code>npx skills add shuence/design-storyboard</code> installs it into every supported agent it detects.</p>
         </details>
       </div>
     </div>
@@ -916,10 +942,11 @@ cp -R /tmp/ds/skills/design-storyboard ~/.agents/skills/</div>
       <h2>Ship a <em>folder</em>, not a moodboard.</h2>
       <p class="lede">Interview in. Storyboard, mockups, landing page, icons, illustrations and store kit out, all from one tokens file.</p>
       <div class="hero-actions" style="justify-content:center">
-        <a class="btn primary" href="https://github.com/shuence/design-storyboard">Install the skill <span class="arrow">→</span></a>
+        <a class="btn primary" href="https://skills.sh/shuence/design-storyboard">Install from skills.sh <span class="arrow">→</span></a>
         <a class="btn ghost" href="#faq">Read the questions</a>
       </div>
-      <p class="hero-note">MIT licensed · No npm install · Renders offline with <span class="mono">file://</span></p>
+      <div class="cmd" style="margin:28px auto 0;max-width:392px;text-align:left"><button class="copy" data-copy="npx skills add shuence/design-storyboard">copy</button>npx skills add shuence/design-storyboard</div>
+      <p class="hero-note">MIT licensed · The folder itself needs no npm install and renders offline with <span class="mono">file://</span></p>
     </div>
   </section>
 </div>
@@ -930,10 +957,10 @@ cp -R /tmp/ds/skills/design-storyboard ~/.agents/skills/</div>
     <div class="foot">
       <div class="foot-brand">
         <span class="wordmark">
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><rect width="100" height="100" rx="22.5" fill="#151312"/><g transform="translate(50 50)"><path d="M0 0 C11 -11.2 12.32 -28 0 -40 C-12.32 -28 -11 -11.2 0 0 Z" fill="#FAF9F7" transform="rotate(0)"/><path d="M0 0 C11 -11.2 12.32 -28 0 -40 C-12.32 -28 -11 -11.2 0 0 Z" fill="#FAF9F7" transform="rotate(72)"/><path d="M0 0 C11 -11.2 12.32 -28 0 -40 C-12.32 -28 -11 -11.2 0 0 Z" fill="#FAF9F7" transform="rotate(144)"/><path d="M0 0 C11 -11.2 12.32 -28 0 -40 C-12.32 -28 -11 -11.2 0 0 Z" fill="#FAF9F7" transform="rotate(216)"/><path d="M0 0 C11 -11.2 12.32 -28 0 -40 C-12.32 -28 -11 -11.2 0 0 Z" fill="#FAF9F7" transform="rotate(288)"/><circle r="9" fill="#C93C55"/></g></svg>
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><rect width="100" height="100" rx="22.5" fill="#151312"/><g transform="translate(50 50) scale(1)"><path d="M0 0 C12.5 -10.5 14.5 -24 7.5 -34.5 C4.2 -39.2 -4.2 -39.2 -7.5 -34.5 C-14.5 -24 -12.5 -10.5 0 0 Z" fill="#FAF9F7" transform="rotate(0)"/><path d="M0 0 C12.5 -10.5 14.5 -24 7.5 -34.5 C4.2 -39.2 -4.2 -39.2 -7.5 -34.5 C-14.5 -24 -12.5 -10.5 0 0 Z" fill="#FAF9F7" transform="rotate(72)"/><path d="M0 0 C12.5 -10.5 14.5 -24 7.5 -34.5 C4.2 -39.2 -4.2 -39.2 -7.5 -34.5 C-14.5 -24 -12.5 -10.5 0 0 Z" fill="#FAF9F7" transform="rotate(144)"/><path d="M0 0 C12.5 -10.5 14.5 -24 7.5 -34.5 C4.2 -39.2 -4.2 -39.2 -7.5 -34.5 C-14.5 -24 -12.5 -10.5 0 0 Z" fill="#FAF9F7" transform="rotate(216)"/><path d="M0 0 C12.5 -10.5 14.5 -24 7.5 -34.5 C4.2 -39.2 -4.2 -39.2 -7.5 -34.5 C-14.5 -24 -12.5 -10.5 0 0 Z" fill="#FAF9F7" transform="rotate(288)"/><circle r="8.4" fill="#C93C55"/></g></svg>
           design<span>–</span>storyboard
         </span>
-        <p>An agent skill for people who ship apps. Built on the recipe from momo's design folder.</p>
+        <p>An agent skill for people who ship apps. Built on a recipe proven on real apps.</p>
       </div>
       <div class="foot-links">
         <div class="foot-col">
@@ -945,6 +972,7 @@ cp -R /tmp/ds/skills/design-storyboard ~/.agents/skills/</div>
         <div class="foot-col">
           <b>Repo</b>
           <a href="https://github.com/shuence/design-storyboard">GitHub</a>
+          <a href="https://skills.sh/shuence/design-storyboard">skills.sh</a>
           <a href="https://github.com/shuence/design-storyboard/blob/main/skills/design-storyboard/prompt.md">Prompt</a>
           <a href="https://github.com/shuence/design-storyboard/blob/main/docs/NAMING_RESEARCH.md">Naming research</a>
         </div>
@@ -968,6 +996,12 @@ cp -R /tmp/ds/skills/design-storyboard ~/.agents/skills/</div>
   "operatingSystem": "macOS, Linux",
   "description": "An agent skill that interviews you about your app, then generates the full design folder: storyboard, hi-fi mockups, landing page, logo, launcher icons, illustrations, content packs and store assets from one tokens file.",
   "url": "https://design-storyboard.vercel.app/",
+  "installUrl": "https://skills.sh/shuence/design-storyboard",
+  "codeRepository": "https://github.com/shuence/design-storyboard",
+  "sameAs": [
+    "https://github.com/shuence/design-storyboard",
+    "https://skills.sh/shuence/design-storyboard"
+  ],
   "license": "https://opensource.org/licenses/MIT",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
 }

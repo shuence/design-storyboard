@@ -1,4 +1,4 @@
-# design-storyboard
+# <img src="assets/generated/icons/default.svg" width="38" height="38" valign="middle" alt=""> design-storyboard
 
 [![skills.sh](https://skills.sh/b/shuence/design-storyboard)](https://skills.sh/shuence/design-storyboard)
 
@@ -31,6 +31,7 @@ A design folder that is drawn by hand rots the first time a colour changes. Here
 
 | Artifact | Generated from |
 |---|---|
+| The mark, the favicon, the launcher icons | `scripts/brand.mjs` |
 | Every screen, every store PNG | `tokens.json` + the mockup CSS |
 | iOS `.appiconset` | `app-icons.mjs` |
 | Android adaptive icon + real `<monochrome>` layer | `app-icons.mjs` |
@@ -50,7 +51,7 @@ If iOS and Android ever need separate hand edits, the generator is missing a rul
 npx skills add shuence/design-storyboard
 ```
 
-That finds your agents and wires the skill into each one. `skills add` also lists it on [skills.sh](https://skills.sh/shuence/design-storyboard).
+That finds your agents and wires the skill into each one. `skills add` also lists it on [skills.sh](https://skills.sh/shuence/design-storyboard), and `npx skills update` keeps it current.
 
 **Or manually**: drop it where your agent looks for skills:
 
@@ -154,14 +155,19 @@ No npm install. No build step. The design folder has to render offline with `fil
 `index.html` is the launch page for this skill. It is its own demo: same tokens, same contrast discipline, real metadata, an OG card rendered from `og.html`.
 
 ```bash
+node scripts/brand.mjs   # the mark → favicon.svg, launcher icons, nav lock-up
+node scripts/brand.mjs --check   # fail if any of them drifted
 ./scripts/render-og.sh   # regenerates og.png at 1200×628
 ```
+
+The mark is one string in `scripts/brand.mjs`. `favicon.svg`, the four launcher icons on the landing page, the OG card, the README header and the whole `launch/` kit are all output of it, so the site and the launch assets cannot show two different logos.
 
 ---
 
 ## Docs
 
 - [Naming research](docs/NAMING_RESEARCH.md): what the installed-skill ecosystem actually names things, and why this is called `design-storyboard`
+- [skills.sh listing](https://skills.sh/shuence/design-storyboard): the registry page, install command and the badge above
 
 ---
 

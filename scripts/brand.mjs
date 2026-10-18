@@ -30,8 +30,20 @@
 // the middle 80%, which is the padding a rounded app tile wants.
 // =====================================================================
 
-const PETAL = "M0 0 C11 -11.2 12.32 -28 0 -40 C-12.32 -28 -11 -11.2 0 0 Z";
+// A petal: pointed where it meets the centre, rounded at the tip.
+//
+// Two cubics for the flanks and one for the cap. The cap's control points
+// are pulled in to (4.2, -39.2) so the curve has a horizontal tangent at
+// the tip — that is what makes it read as a petal rather than a star.
+// No arcs: `A` commands convert badly to Android path strings, and the
+// whole mark has to survive being rasterised to 16px.
+//
+// Radius 38 of the 50 available, so the bloom fills 76% of the canvas —
+// the padding a rounded app tile wants.
+const PETAL =
+  "M0 0 C12.5 -10.5 14.5 -24 7.5 -34.5 C4.2 -39.2 -4.2 -39.2 -7.5 -34.5 C-14.5 -24 -12.5 -10.5 0 0 Z";
 const PETALS = 5;
+const HEART = 8.4; // the rose centre, same units
 const TILE_RADIUS = 22.5; // % of the canvas — matches the iOS squircle closely
 
 // tile:  null = draw no tile (the mark sits on a known ground)
@@ -87,7 +99,7 @@ export function markSVG(variant = "ink", opts = {}) {
 
   // The heart is a plain circle: it needs no scaling with the bloom, but
   // it must stay proportional, so it is expressed in the same units.
-  const bloom = `<g transform="translate(50 50) scale(${scale})">${petals}<circle r="9" fill="${V.heart}"/></g>`;
+  const bloom = `<g transform="translate(50 50) scale(${scale})">${petals}<circle r="${HEART}" fill="${V.heart}"/></g>`;
 
   return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"${dims}${a11y}>${tile}${bloom}</svg>`;
 }

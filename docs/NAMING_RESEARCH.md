@@ -92,3 +92,10 @@ fight the one-liner either.
 Rejected `design-forge` (better logo story, weaker search), `foundry` (memorable, but the
 brand would have to carry the category), and `design-folder` (accurate about the output,
 silent about the value).
+
+## Where it ships
+
+The name is published as a skill on [skills.sh](https://skills.sh/shuence/design-storyboard),
+installed with `npx skills add shuence/design-storyboard`. That registry ranks skills by
+anonymous install telemetry alone, so the name has to be searchable on its own: the slug is
+`design-storyboard`, and the one-liner does the explaining.
