@@ -1,0 +1,999 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>design-storyboard — your app deserves a design folder</title>
+<meta name="description" content="An agent skill that interviews you about your app, then generates the whole design/ folder: storyboard, hi-fi mockups, landing page, logo, launcher icons, illustrations, content packs and every store asset — from one tokens file.">
+<link rel="canonical" href="https://design-storyboard.vercel.app/">
+<meta property="og:title" content="design-storyboard — your app deserves a design folder">
+<meta property="og:description" content="Storyboard, hi-fi mockups, landing page, logo, launcher icons, illustrations and a store kit. Generated from one tokens file.">
+<meta property="og:image" content="https://design-storyboard.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="628">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FAF9F7">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&display=swap" rel="stylesheet">
+
+<style>
+  /* =====================================================================
+     BLOCK 1 — TOKENS
+     Mirrored from momo design/tokens.json (direction B, "Quiet luxury").
+     No value here is invented. If one is missing, add it to the tokens
+     first and regenerate — do not type a new hex into this file.
+     ===================================================================== */
+  :root{
+    color-scheme: light;
+
+    /* color.neutral */
+    --paper:#FAF9F7;
+    --white:#FFFFFF;
+    --soft:#F2EEEB;
+    --blush:#F8E6E9;
+    --line:#ECE7E3;
+    --ink:#151312;
+    --ink2:#6E6763;
+    --ink3:#8F8782;
+
+    /* color.brand */
+    --rose:#C93C55;
+    --rose-deep:#7C2236;
+    --rose-light:#E9798B;
+    --rose-glow:#B1304A;
+
+    /* color.support */
+    --petal:#F8E6E9;
+    --butter:#F5EAD3;
+    --sage:#E3EBDF;
+    --sky:#E2EAF3;
+    --lilac:#ECE5F3;
+
+    /* radius */
+    --r-xs:8px;
+    --r-sm:12px;
+    --r-md:16px;
+    --r-lg:22px;
+    --r-xl:28px;
+
+    /* typography */
+    --serif:"Newsreader",Georgia,"Times New Roman",serif;
+    --ui:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+
+    /* layout */
+    --max:1140px;
+    --gutter:26px;
+
+    --shadow-sm:0 1px 2px rgba(21,19,18,.04), 0 10px 26px -24px rgba(21,19,18,.30);
+    --shadow-lg:0 1px 2px rgba(21,19,18,.05), 0 44px 80px -56px rgba(40,20,15,.50);
+  }
+
+  /* =====================================================================
+     BLOCK 2 — PAGE
+     ===================================================================== */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:var(--ui);font-size:16px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    overflow-x:clip;
+  }
+  img,svg{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  ::selection{background:var(--blush);color:var(--ink)}
+  :focus-visible{outline:2px solid var(--rose);outline-offset:3px;border-radius:4px}
+
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+  .mono{font-family:var(--mono);font-size:.92em;letter-spacing:-.01em}
+  section{padding:clamp(72px,8.5vw,124px) 0}
+  .rule{border-top:1px solid var(--line)}
+
+  /* grid/flex children default to min-width:auto — let them shrink */
+  .split>*,.folder-grid>*,.hero-grid>*,.install-grid>*,.cards>*,
+  .gallery>*,.phase-grid>*,.principles>*{min-width:0}
+
+  h1,h2,h3,.serif{
+    font-family:var(--serif);font-weight:400;
+    letter-spacing:-.025em;line-height:1.02;
+  }
+  h1{font-size:clamp(42px,6.1vw,80px)}
+  h2{font-size:clamp(29px,3.7vw,46px);line-height:1.06;letter-spacing:-.022em}
+  h3{font-size:21px;line-height:1.24;letter-spacing:-.015em}
+  em{font-style:italic;color:var(--rose)}
+
+  .lede{font-size:clamp(16.5px,1.55vw,19px);line-height:1.58;color:var(--ink2);max-width:56ch}
+  .lede b{color:var(--ink);font-weight:500}
+
+  .eyebrow{
+    display:flex;align-items:center;gap:9px;
+    font-size:13px;font-weight:600;letter-spacing:-.005em;
+    color:var(--ink3);margin-bottom:18px;
+  }
+  .eyebrow::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--rose);flex:none}
+
+  /* =====================================================================
+     BLOCK 3 — NAV
+     ===================================================================== */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,249,247,.88);
+    backdrop-filter:blur(18px) saturate(1.3);
+    border-bottom:1px solid var(--line);
+  }
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:70px;gap:26px}
+  .wordmark{font-family:var(--ui);font-size:15px;font-weight:600;letter-spacing:-.03em;white-space:nowrap}
+  .wordmark span{color:var(--rose)}
+  .nav-links{display:flex;align-items:center;gap:30px;font-size:13.5px;color:var(--ink2)}
+  .nav-links a{transition:color .15s ease;white-space:nowrap}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{
+    display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 16px;
+    border-radius:999px;background:var(--ink);color:var(--paper);
+    font-size:13px;font-weight:500;letter-spacing:-.01em;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .nav-cta:hover{transform:translateY(-1px);box-shadow:0 10px 24px -14px rgba(21,19,18,.6)}
+  .nav-cta .arrow{transition:transform .18s ease}
+  .nav-cta:hover .arrow{transform:translate(2px,-2px)}
+  @media (max-width:840px){ .nav-links a{display:none} }
+
+  /* =====================================================================
+     BLOCK 4 — HERO
+     ===================================================================== */
+  .hero{padding:clamp(52px,6vw,92px) 0 clamp(56px,6vw,86px)}
+  .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(36px,5vw,70px);align-items:center}
+  .hero h1{margin-bottom:26px}
+  .hero .lede{margin-bottom:34px}
+  .hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .hero-note{margin-top:22px;font-size:12.5px;line-height:1.6;color:var(--ink3)}
+  .hero-note b{color:var(--ink2);font-weight:500}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    height:52px;padding:0 26px;border-radius:var(--r-md);
+    font-size:15px;font-weight:500;letter-spacing:-.01em;white-space:nowrap;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn.primary{background:var(--ink);color:var(--paper)}
+  .btn.primary:hover{box-shadow:0 16px 34px -18px rgba(21,19,18,.55);transform:translateY(-1px)}
+  .btn.ghost{box-shadow:inset 0 0 0 1.5px var(--line);color:var(--ink)}
+  .btn.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--ink3);background:var(--white)}
+  .btn .arrow{transition:transform .18s ease}
+  .btn:hover .arrow{transform:translateX(3px)}
+
+  /* --- the storyboard, in miniature -------------------------------- */
+  .hero-board{position:relative}
+  /* the rose glow, once per page, behind the one important thing */
+  .hero-board::before{
+    content:"";position:absolute;inset:-6% -10% -12% -6%;z-index:0;
+    background:
+      radial-gradient(58% 52% at 78% 18%, rgba(233,121,139,.42) 0%, transparent 68%),
+      radial-gradient(52% 46% at 12% 82%, rgba(124,34,54,.20) 0%, transparent 70%);
+    filter:blur(34px);
+  }
+  .board-card{
+    position:relative;z-index:1;
+    background:var(--white);border-radius:var(--r-xl);
+    padding:14px 14px 15px;box-shadow:var(--shadow-lg);
+  }
+  .board-bar{
+    display:flex;align-items:center;gap:7px;padding:2px 4px 13px;
+    font-size:10px;letter-spacing:.02em;color:var(--ink3);font-family:var(--mono);
+  }
+  .board-bar i{width:5px;height:5px;border-radius:50%;background:var(--line)}
+  .board-bar .title{margin-left:6px;color:var(--ink3)}
+  .board-bar .count{margin-left:auto;white-space:nowrap}
+  .board-rail{display:flex;gap:11px}
+  .shot{flex:1;min-width:0}
+  .shot figcaption{
+    margin-top:10px;font-size:9.5px;line-height:1.4;color:var(--ink3);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .shot figcaption b{color:var(--ink2);font-weight:500}
+
+  .phone{
+    width:100%;aspect-ratio:9/19;border-radius:29px;padding:4px;background:#121110;
+    box-shadow:0 1px 0 rgba(255,255,255,.08) inset, 0 26px 44px -28px rgba(40,20,15,.55);
+  }
+  .screen{
+    position:relative;width:100%;height:100%;border-radius:26px;overflow:hidden;
+    background:var(--paper);color:var(--ink);display:flex;flex-direction:column;
+  }
+  .status{display:flex;justify-content:space-between;align-items:center;padding:7px 11px 0;font-size:6.5px;font-weight:600}
+  .status .island{width:28px;height:8px;border-radius:999px;background:#000}
+  .s-body{flex:1;min-height:0;padding:9px 10px 0;display:flex;flex-direction:column}
+  .gesture{height:3px;width:32%;margin:auto auto 6px;border-radius:2px;background:var(--ink);opacity:.7}
+
+  .s-glow{
+    background:
+      radial-gradient(120% 90% at 100% 0%, var(--rose-light) 0%, transparent 55%),
+      radial-gradient(90% 80% at 0% 100%, var(--rose-deep) 0%, transparent 60%),
+      var(--rose-glow);
+    color:#fff;
+  }
+  .s-glow .gesture{background:#fff;opacity:.9}
+  .s-eb{font-size:6px;letter-spacing:.02em;opacity:.9}
+  .s-q{font-family:var(--serif);font-size:15px;line-height:1.1;letter-spacing:-.02em;margin-top:5px}
+  .s-meta{font-size:5.5px;opacity:.92;margin-top:auto;display:flex;align-items:center;gap:4px;padding-bottom:6px}
+  .s-meta i{width:4px;height:4px;border-radius:50%;background:#fff}
+  .s-btn{margin-bottom:7px;height:14px;border-radius:5px;background:#fff;color:var(--rose-deep);
+         font-size:5.5px;font-weight:600;display:grid;place-items:center}
+  .s-title{font-family:var(--serif);font-size:14px;letter-spacing:-.02em;line-height:1.05}
+  .s-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:7px}
+  .s-grid i{display:block;aspect-ratio:1;border-radius:5px}
+  .s-cap{font-size:5.5px;line-height:1.45;color:var(--ink2);margin-top:7px}
+  .s-letter{font-family:var(--serif);font-size:9px;line-height:1.38;margin-top:8px;color:var(--ink)}
+  .s-sign{font-family:var(--serif);font-style:italic;font-size:8px;color:var(--ink2);margin-top:8px}
+
+  /* =====================================================================
+     BLOCK 5 — PROOF STRIP
+     ===================================================================== */
+  .proof{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:24px 0}
+  .proof-inner{display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap}
+  .proof-item{display:flex;align-items:baseline;gap:9px;font-size:13px;color:var(--ink2)}
+  .proof-item b{font-family:var(--serif);font-size:21px;font-weight:400;color:var(--ink);letter-spacing:-.02em}
+
+  /* =====================================================================
+     BLOCK 6 — THE RULE
+     ===================================================================== */
+  .split{display:grid;grid-template-columns:.94fr 1.06fr;gap:clamp(34px,5.5vw,76px);align-items:start}
+  .split.center{align-items:center}
+  .split.faq{grid-template-columns:.66fr 1.34fr}
+  .split.callout-split{grid-template-columns:1.1fr .9fr;align-items:center}
+  @media (max-width:920px){ .split,.split.faq,.split.callout-split{grid-template-columns:1fr;gap:44px} }
+
+  .gen-table{width:100%;border-collapse:collapse;font-size:14px}
+  .gen-table th{
+    text-align:left;font-size:11px;font-weight:600;color:var(--ink3);
+    padding:0 0 11px;border-bottom:1px solid var(--ink3);
+  }
+  .gen-table td{padding:15px 0;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45}
+  .gen-table td:first-child{color:var(--ink);font-weight:500;padding-right:22px}
+  .gen-table td:last-child{font-family:var(--mono);font-size:12px;color:var(--ink2)}
+  .gen-table tr:last-child td{border-bottom:0}
+
+  /* =====================================================================
+     BLOCK 7 — FOLDER + ARTIFACTS
+     ===================================================================== */
+  .folder-grid{display:grid;grid-template-columns:.88fr 1.12fr;gap:clamp(30px,4.5vw,58px);align-items:start}
+  @media (max-width:920px){ .folder-grid{grid-template-columns:1fr} }
+
+  .tree{
+    background:var(--ink);color:#EDE7E3;border-radius:var(--r-lg);
+    padding:24px 22px;font-family:var(--mono);font-size:12.5px;line-height:1.9;
+    overflow-x:auto;white-space:pre;letter-spacing:-.01em;
+  }
+  .tree .c{color:#A8A09B}
+  .tree .a{color:#F0909E}
+
+  .artifacts{display:grid;grid-template-columns:1fr 1fr;gap:0 34px}
+  .artifact{padding:17px 0;border-bottom:1px solid var(--line)}
+  .artifact:nth-last-child(-n+2){border-bottom:0}
+  .artifact h4{font-family:var(--serif);font-size:19px;font-weight:400;letter-spacing:-.018em;line-height:1.2}
+  .artifact p{font-size:13px;line-height:1.5;color:var(--ink2);margin-top:5px}
+  @media (max-width:640px){ .artifacts{grid-template-columns:1fr} .artifact:nth-last-child(2){border-bottom:1px solid var(--line)} }
+
+  /* =====================================================================
+     BLOCK 8 — CONCEPT PACKS
+     ===================================================================== */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:42px}
+  @media (max-width:900px){ .cards{grid-template-columns:1fr 1fr} }
+  @media (max-width:600px){ .cards{grid-template-columns:1fr} }
+  .card{
+    background:var(--white);border-radius:var(--r-lg);padding:24px 22px 26px;
+    box-shadow:var(--shadow-sm);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{transform:translateY(-2px);box-shadow:0 1px 2px rgba(21,19,18,.04), 0 22px 40px -30px rgba(21,19,18,.4)}
+  .card .tag{font-family:var(--mono);font-size:10.5px;color:var(--ink3);letter-spacing:.01em}
+  .card h4{font-family:var(--serif);font-size:21px;font-weight:400;letter-spacing:-.02em;margin:9px 0 7px}
+  .card p{font-size:13px;line-height:1.55;color:var(--ink2)}
+  .card.wide{grid-column:span 1}
+
+  /* =====================================================================
+     BLOCK 9 — WORKFLOW
+     ===================================================================== */
+  .phase-grid{display:grid;grid-auto-flow:column;grid-template-rows:repeat(6,auto);grid-template-columns:1fr 1fr;
+              gap:0 58px;margin-top:14px}
+  .phase{display:flex;gap:16px;padding:19px 0;border-top:1px solid var(--line)}
+  .phase .num{font-family:var(--mono);font-size:11px;color:var(--rose);padding-top:3px;flex:none}
+  .phase h4{font-family:var(--ui);font-size:14px;font-weight:600;letter-spacing:-.01em;margin-bottom:3px}
+  .phase p{font-size:12.5px;line-height:1.5;color:var(--ink2)}
+  @media (max-width:860px){
+    .phase-grid{grid-auto-flow:row;grid-template-rows:none;grid-template-columns:1fr}
+  }
+
+  /* =====================================================================
+     BLOCK 10 — GENERATED COMPONENTS
+     ===================================================================== */
+  .gallery{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:44px}
+  @media (max-width:860px){ .gallery{grid-template-columns:1fr} }
+  .panel{background:var(--white);border-radius:var(--r-xl);padding:26px;box-shadow:var(--shadow-sm)}
+  .panel-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:22px}
+  .panel-head h4{font-family:var(--ui);font-size:12px;font-weight:600;color:var(--ink3)}
+  .panel-head .mono{font-family:var(--mono);font-size:11px;color:var(--ink3)}
+
+  .icon-row{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
+  .icon-tile{display:grid;gap:9px;justify-items:center}
+  .icon-tile .frame{
+    width:74px;height:74px;border-radius:18px;display:grid;place-items:center;
+    background:var(--soft);overflow:hidden;
+  }
+  .icon-tile .frame img{width:64px;height:64px}
+  .icon-tile.small .frame{width:26px;height:26px;border-radius:7px}
+  .icon-tile.small .frame img{width:20px;height:20px}
+  .icon-tile span{font-size:10.5px;color:var(--ink3);font-family:var(--mono)}
+
+  .illus-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .illus{background:var(--soft);border-radius:var(--r-md);padding:12px;display:grid;place-items:center;min-height:104px}
+  .illus img{width:100%;max-width:132px;height:auto}
+
+  /* =====================================================================
+     BLOCK 11 — LANDING CALLOUT
+     ===================================================================== */
+  .callout{background:var(--white);border-radius:var(--r-xl);padding:clamp(28px,4vw,48px);box-shadow:var(--shadow-sm)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+  .chip{
+    font-size:12px;line-height:1.35;padding:8px 13px;border-radius:999px;
+    background:var(--soft);color:var(--ink2);white-space:nowrap;
+  }
+  .chip.accent{background:var(--blush);color:var(--rose-deep)}
+
+  /* =====================================================================
+     BLOCK 12 — PRINCIPLES
+     ===================================================================== */
+  .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+  .principle{padding:0 30px;border-left:1px solid var(--line)}
+  .principle:first-child{padding-left:0;border-left:0}
+  .principle .glyph{font-family:var(--serif);font-size:30px;line-height:1;color:var(--rose);margin-bottom:16px}
+  .principle h4{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-.02em;margin-bottom:8px}
+  .principle p{font-size:13.5px;line-height:1.55;color:var(--ink2)}
+  @media (max-width:860px){
+    .principles{grid-template-columns:1fr;gap:28px}
+    .principle{padding:0;border-left:0}
+  }
+
+  /* =====================================================================
+     BLOCK 13 — INSTALL
+     ===================================================================== */
+  .install-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px}
+  @media (max-width:860px){ .install-grid{grid-template-columns:1fr} }
+  .install-card{
+    background:var(--white);border-radius:var(--r-lg);padding:26px 24px;
+    box-shadow:var(--shadow-sm);display:flex;flex-direction:column;min-width:0;
+  }
+  .install-card h4{font-family:var(--ui);font-size:12px;font-weight:600;color:var(--ink3);margin-bottom:13px}
+  .install-card p{font-size:13px;line-height:1.55;color:var(--ink2);margin-bottom:16px}
+  .cmd{
+    position:relative;background:var(--ink);color:#EDE7E3;border-radius:var(--r-sm);
+    padding:14px 46px 14px 14px;font-family:var(--mono);font-size:11.5px;line-height:1.8;
+    overflow-x:auto;white-space:pre;min-width:0;
+  }
+  .copy{
+    position:absolute;top:7px;right:7px;height:24px;padding:0 9px;border-radius:7px;
+    background:rgba(255,255,255,.12);color:#EDE7E3;font-size:10px;font-weight:500;
+    transition:background .15s ease;
+  }
+  .copy:hover{background:rgba(255,255,255,.22)}
+  .copy.done{background:var(--rose);color:#fff}
+
+  .prompt-box{position:relative;background:var(--ink);color:#EDE7E3;border-radius:var(--r-sm);padding:20px 54px 20px 20px}
+  .prompt-box p{font-size:13.5px;line-height:1.6;color:inherit;margin:0;max-width:none}
+  .prompt-box .mono{font-family:var(--mono);font-size:12px;color:#F0909E}
+
+  /* =====================================================================
+     BLOCK 14 — FAQ
+     ===================================================================== */
+  details{border-bottom:1px solid var(--line);padding:21px 0}
+  details summary{
+    display:flex;justify-content:space-between;align-items:baseline;gap:22px;
+    cursor:pointer;list-style:none;font-size:16px;font-weight:500;letter-spacing:-.01em;
+  }
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"+";font-family:var(--mono);font-size:16px;color:var(--ink3);flex:none}
+  details[open] summary::after{content:"–"}
+  details p{margin-top:13px;font-size:14.5px;line-height:1.62;color:var(--ink2);max-width:66ch}
+  details p code{font-family:var(--mono);font-size:12.5px;background:var(--soft);padding:1px 5px;border-radius:5px}
+
+  /* =====================================================================
+     BLOCK 15 — FINAL + FOOTER
+     ===================================================================== */
+  .final{padding:clamp(80px,10vw,140px) 0;text-align:center}
+  .final h2{max-width:16ch;margin:0 auto 20px}
+  .final .lede{margin:0 auto 34px;max-width:46ch}
+  .final .hero-note{margin-top:24px}
+
+  footer{border-top:1px solid var(--line);padding:46px 0 64px;font-size:13px;color:var(--ink2)}
+  .foot{display:flex;justify-content:space-between;gap:44px;flex-wrap:wrap;align-items:flex-start}
+  .foot-brand{max-width:32ch}
+  .foot-brand .wordmark{display:block;margin-bottom:8px;color:var(--ink)}
+  .foot-brand p{line-height:1.55}
+  .foot-links{display:flex;gap:52px;flex-wrap:wrap}
+  .foot-col{display:grid;gap:9px}
+  .foot-col b{color:var(--ink3);font-size:11px;font-weight:600;margin-bottom:3px}
+  .foot-col a:hover{color:var(--ink)}
+
+  /* =====================================================================
+     BLOCK 16 — MOTION
+     ===================================================================== */
+  .reveal{opacity:0;transform:translateY(14px);
+          transition:opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+  }
+
+  /* =====================================================================
+     BLOCK 17 — SMALL SCREENS
+     ===================================================================== */
+  @media (max-width:960px){
+    .hero-grid{grid-template-columns:1fr;gap:52px}
+    .hero-board{order:2}
+  }
+  @media (max-width:640px){
+    :root{--gutter:20px}
+    .gen-table{font-size:13px}
+    .gen-table td:first-child{padding-right:12px}
+    .gen-table td:last-child{font-size:11px;word-break:break-word}
+    .board-rail{gap:8px}
+    .shot figcaption{font-size:8.5px}
+    .chips .chip{white-space:normal;max-width:100%}
+    .illus-row{grid-template-columns:1fr 1fr}
+    .tree{font-size:11px;padding:20px 18px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================================ NAV ================================ -->
+<header class="nav">
+  <div class="wrap">
+    <a class="wordmark" href="#top">design<span>–</span>storyboard</a>
+    <nav class="nav-links">
+      <a href="#build">What it builds</a>
+      <a href="#concepts">Concept packs</a>
+      <a href="#workflow">Workflow</a>
+      <a href="#install">Install</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="nav-cta" href="https://github.com/shuence/design-storyboard">
+      GitHub <span class="arrow">↗</span>
+    </a>
+  </div>
+</header>
+
+<!-- =============================== HERO ================================ -->
+<div id="top"></div>
+<div class="wrap">
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">An agent skill for people who ship apps</p>
+        <h1>Your app deserves a <em>design folder</em>.</h1>
+        <p class="lede">
+          One conversation in. A storyboard, hi-fi mockups, a <b>landing page</b>, logo concepts,
+          launcher icons, illustrations, store screenshots — and a contrast gate that has to pass.
+          All generated from a single <b>tokens.json</b>, so nothing can drift.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#install">Install the skill <span class="arrow">→</span></a>
+          <a class="btn ghost" href="#build">See what it builds</a>
+        </div>
+        <p class="hero-note">
+          Claude Code · Codex · OpenCode · Cursor — needs <b>Node</b> and <b>Chrome</b>. Nothing else.
+        </p>
+      </div>
+
+      <div class="hero-board">
+        <div class="board-card">
+          <div class="board-bar">
+            <i></i><i></i><i></i>
+            <span class="title">app.html · storyboard</span>
+            <span class="count">9 groups · 68 screens</span>
+          </div>
+          <div class="board-rail">
+
+            <!-- 01 · Today -->
+            <figure class="shot">
+              <div class="phone"><div class="screen s-glow">
+                <div class="status"><span>9:41</span><span class="island"></span><span>􀙇</span></div>
+                <div class="s-body">
+                  <div class="s-eb">Day 48 · today</div>
+                  <div class="s-q">What do you think I <em style="color:#FFE3E8">misunderstand</em> about you?</div>
+                  <div class="s-meta"><i></i> Both of you answer before it opens</div>
+                  <div class="s-btn">Answer</div>
+                  <div class="gesture"></div>
+                </div>
+              </div></div>
+              <figcaption><b>Today</b> · Live</figcaption>
+            </figure>
+
+            <!-- 02 · Memories -->
+            <figure class="shot">
+              <div class="phone"><div class="screen">
+                <div class="status"><span>9:41</span><span class="island"></span><span>􀙇</span></div>
+                <div class="s-body">
+                  <div class="s-title">Memories</div>
+                  <div class="s-grid">
+                    <i style="background:linear-gradient(145deg,#F4CBB8,#C98A6B)"></i>
+                    <i style="background:linear-gradient(145deg,#D9E3D3,#8FA783)"></i>
+                    <i style="background:linear-gradient(145deg,#E8DCEF,#A98BBF)"></i>
+                    <i style="background:linear-gradient(145deg,#F7E3C4,#D4A45E)"></i>
+                  </div>
+                  <div class="s-cap">Lisbon, the weekend<br>nobody wanted to leave.</div>
+                  <div class="gesture"></div>
+                </div>
+              </div></div>
+              <figcaption><b>Memories</b> · Live</figcaption>
+            </figure>
+
+            <!-- 03 · Letter -->
+            <figure class="shot">
+              <div class="phone"><div class="screen">
+                <div class="status"><span>9:41</span><span class="island"></span><span>􀙇</span></div>
+                <div class="s-body">
+                  <div class="s-eb" style="color:#8F8782">Sealed · opens in 6 days</div>
+                  <div class="s-letter">“I keep the receipt<br>from the first night<br>in the blue tin.”</div>
+                  <div class="s-sign">— for you, in a week</div>
+                  <div class="gesture"></div>
+                </div>
+              </div></div>
+              <figcaption><b>Letter</b> · Planned</figcaption>
+            </figure>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================ PROOF STRIP ============================ -->
+<div class="rule">
+  <div class="wrap">
+    <div class="proof">
+      <div class="proof-inner">
+        <div class="proof-item"><b>11</b> phases, two deliberate stops</div>
+        <div class="proof-item"><b>10</b> concept files</div>
+        <div class="proof-item"><b>10</b> folder artifacts</div>
+        <div class="proof-item"><b>0</b> hand-drawn files</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== THE RULE ============================= -->
+<div class="wrap">
+  <section>
+    <div class="split">
+      <div class="reveal">
+        <p class="eyebrow">The one rule</p>
+        <h2>Nothing is <em>hand-drawn</em>.</h2>
+        <p class="lede" style="margin-top:20px">
+          A design folder that is drawn by hand rots the first time a colour changes. Here every
+          artifact is the output of a small script you can re-run — so the mockup, the icon, the
+          landing page and the App Store screenshots can never disagree with each other.
+        </p>
+      </div>
+
+      <div class="reveal">
+        <table class="gen-table">
+          <thead><tr><th>Artifact</th><th>Generated from</th></tr></thead>
+          <tbody>
+            <tr><td>Every screen, every store PNG</td><td>tokens.json + mockup CSS</td></tr>
+            <tr><td>iOS <code>.appiconset</code></td><td>app-icons.mjs</td></tr>
+            <tr><td>Android adaptive + monochrome</td><td>app-icons.mjs</td></tr>
+            <tr><td>Illustrations, both platforms</td><td>illustrations.mjs</td></tr>
+            <tr><td>Landing page + OG card</td><td>the same tokens</td></tr>
+            <tr><td>DESIGN_SYSTEM.md, Kotlin, Swift</td><td>tokens.json</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================ WHAT IT BUILDS ========================= -->
+<div class="wrap" id="build">
+  <section class="rule">
+    <div class="reveal" style="max-width:34ch">
+      <p class="eyebrow">What it builds</p>
+      <h2>One folder that is the source of truth, the review surface and the asset factory.</h2>
+    </div>
+
+    <div class="folder-grid" style="margin-top:48px">
+      <div class="reveal">
+        <div class="tree"><span class="a">design/</span>
+├── tokens.json            <span class="c">DTCG source of truth</span>
+├── check-contrast.mjs     <span class="c">WCAG gate, exits 1</span>
+├── app-icons.mjs          <span class="c">→ both platforms</span>
+├── illustrations.mjs      <span class="c">→ SVG + drawable</span>
+├── app-icons/             <span class="c">review SVGs</span>
+├── illustrations/         <span class="c">review SVGs</span>
+├── fonts/                 <span class="c">licensed, subset</span>
+├── question-packs/        <span class="c">copy decks</span>
+├── redesign/
+│   ├── directions.html    <span class="c">3 directions, pick one</span>
+│   ├── app.html           <span class="c">storyboard + mockups</span>
+│   ├── landing.html       <span class="c">marketing, same tokens</span>
+│   └── og.png             <span class="c">1200 × 628</span>
+├── store/
+│   ├── logo-icon.html     <span class="c">mark + icons</span>
+│   ├── design-board.html  <span class="c">one-page review</span>
+│   └── build/ ios/ android/ marketing/
+└── IMAGE_CREDITS.md       <span class="c">licence per asset</span></div>
+      </div>
+
+      <div class="reveal">
+        <div class="artifacts">
+          <div class="artifact"><h4>Storyboard</h4><p>Every screen, grouped by job, each captioned with why it exists.</p></div>
+          <div class="artifact"><h4>Hi-fi mockups</h4><p>Real CSS, real type, in a device frame — not flattened images.</p></div>
+          <div class="artifact"><h4>Directions</h4><p>Three type-and-colour systems on the same screens. You pick one.</p></div>
+          <div class="artifact"><h4>Landing page</h4><p>Same tokens, objection-led sections, real metadata and an OG card.</p></div>
+          <div class="artifact"><h4>Logo + wordmark</h4><p>Mark, wordmark and launcher icon, shown from 16 to 1024px.</p></div>
+          <div class="artifact"><h4>Launcher icons</h4><p>Opaque iOS set and a 108dp Android adaptive layer with monochrome.</p></div>
+          <div class="artifact"><h4>Illustrations</h4><p>One canvas, one script, both platforms from the same paths.</p></div>
+          <div class="artifact"><h4>Content packs</h4><p>Question and prompt decks, with a real tone per pack.</p></div>
+          <div class="artifact"><h4>Store kit</h4><p>Every required size, generated and headless-rendered.</p></div>
+          <div class="artifact"><h4>Platform mirrors</h4><p>Kotlin and Swift tokens emitted from the same file.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- =========================== CONCEPT PACKS =========================== -->
+<div class="wrap" id="concepts">
+  <section class="rule">
+    <div class="reveal" style="max-width:46ch">
+      <p class="eyebrow">Ten constraint files</p>
+      <h2>Each decision has one owner.</h2>
+      <p class="lede" style="margin-top:20px">
+        The skill ships ten short concept files. None of them is a chapter to paste onto the board —
+        each owns one slice of the tokens, or one artifact, and says which files it writes.
+      </p>
+    </div>
+
+    <div class="cards">
+      <div class="card reveal"><div class="tag">concepts/psychology</div><h4>Psychology</h4><p>Perception, attention, trust, and the manipulation patterns it refuses. Pick five, write them down.</p></div>
+      <div class="card reveal"><div class="tag">concepts/type</div><h4>Type</h4><p>Three pairings, then one. Scale, tracking, and a wordmark that is defined once.</p></div>
+      <div class="card reveal"><div class="tag">concepts/color</div><h4>Color</h4><p>Palette, semantic aliases, accent reservation, and the contrast pairs that must pass.</p></div>
+      <div class="card reveal"><div class="tag">concepts/layout</div><h4>Layout</h4><p>One spacing scale, one radius scale, and screens that consume both without inventing a third.</p></div>
+      <div class="card reveal"><div class="tag">concepts/motion</div><h4>Motion</h4><p>Three durations, one easing family, and what reduced motion removes.</p></div>
+      <div class="card reveal"><div class="tag">concepts/screens</div><h4>Screens</h4><p>Three structures before the pick, then every state — including empty, error and offline.</p></div>
+      <div class="card reveal"><div class="tag">concepts/logo</div><h4>Logo</h4><p>Mark, wordmark, launcher icon — three decisions, in that order, tested at 16px.</p></div>
+      <div class="card reveal"><div class="tag">concepts/illustration</div><h4>Illustration</h4><p>The SVG ∩ VectorDrawable subset, so one file is genuinely one file.</p></div>
+      <div class="card reveal"><div class="tag">concepts/voice</div><h4>Voice</h4><p>One vocabulary. Errors, empty states and the copy deck written as design material.</p></div>
+      <div class="card reveal" style="grid-column:1/-1" ><div class="tag">concepts/board</div><h4>Board</h4><p>The one-page review, assembled from the real tokens and the real assets — the page a founder forwards when someone asks “can I see the design?”</p></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================== WORKFLOW ============================= -->
+<div class="wrap" id="workflow">
+  <section class="rule">
+    <div class="split">
+      <div class="reveal" style="align-self:start">
+        <p class="eyebrow">The workflow</p>
+        <h2>Eleven phases, two of them stops.</h2>
+        <p class="lede" style="margin-top:20px">
+          It interviews you before it draws anything, and it stops twice: once after the three
+          directions, once after the tokens. Those are the two decisions that are expensive to undo.
+        </p>
+      </div>
+
+      <div class="phase-grid reveal">
+        <div class="phase"><span class="num">00</span><div><h4>Interview</h4><p>Promise, user, moment of use, must-nevers, platforms, competitors.</p></div></div>
+        <div class="phase"><span class="num">01</span><div><h4>Orient</h4><p>Inventory what exists and what has to be invented.</p></div></div>
+        <div class="phase"><span class="num">02</span><div><h4>Three directions</h4><p>Same screens, three real systems. <em>Stop.</em></p></div></div>
+        <div class="phase"><span class="num">03</span><div><h4>Tokens + gate</h4><p>DTCG tokens, then the contrast checker must exit 0. <em>Stop.</em></p></div></div>
+        <div class="phase"><span class="num">04</span><div><h4>Storyboard</h4><p>Every screen, grouped and captioned.</p></div></div>
+        <div class="phase"><span class="num">05</span><div><h4>Logo + icons</h4><p>Ideas at real sizes, then one generator.</p></div></div>
+        <div class="phase"><span class="num">06</span><div><h4>Illustrations</h4><p>Path-only, so both platforms agree.</p></div></div>
+        <div class="phase"><span class="num">07</span><div><h4>Content packs</h4><p>Questions, prompts, notifications.</p></div></div>
+        <div class="phase"><span class="num">08</span><div><h4>Landing page</h4><p>Same tokens, real metadata, OG card.</p></div></div>
+        <div class="phase"><span class="num">09</span><div><h4>Store kit</h4><p>Every required size, rendered.</p></div></div>
+        <div class="phase"><span class="num">10</span><div><h4>Mirror</h4><p>Kotlin, Swift and the design doc.</p></div></div>
+        <div class="phase"><span class="num">11</span><div><h4>Verify</h4><p>Run it, paste the output, name the placeholders.</p></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ========================= GENERATED COMPONENTS ====================== -->
+<div class="wrap">
+  <section class="rule">
+    <div class="reveal" style="max-width:44ch">
+      <p class="eyebrow">Not a mockup of a skill</p>
+      <h2>These came out of the generators.</h2>
+      <p class="lede" style="margin-top:20px">
+        Four launcher variants and four illustrations, produced by the two scripts that ship in
+        <span class="mono">assets/</span>. The page you are reading uses the same token file they do.
+      </p>
+    </div>
+
+    <div class="gallery">
+      <div class="panel reveal">
+        <div class="panel-head">
+          <h4>Launcher icons</h4>
+          <span class="mono">app-icons.mjs</span>
+        </div>
+        <div class="icon-row">
+          <div class="icon-tile"><div class="frame"><img src="assets/generated/icons/default.svg" alt="Default launcher icon"></div><span>default</span></div>
+          <div class="icon-tile"><div class="frame"><img src="assets/generated/icons/deep.svg" alt="Deep launcher icon"></div><span>deep</span></div>
+          <div class="icon-tile"><div class="frame"><img src="assets/generated/icons/night.svg" alt="Night launcher icon"></div><span>night</span></div>
+          <div class="icon-tile"><div class="frame"><img src="assets/generated/icons/mono.svg" alt="Monochrome launcher icon"></div><span>mono</span></div>
+          <div class="icon-tile small"><div class="frame"><img src="assets/generated/icons/default.svg" alt=""></div><span>16px</span></div>
+        </div>
+      </div>
+
+      <div class="panel reveal">
+        <div class="panel-head">
+          <h4>Illustrations</h4>
+          <span class="mono">illustrations.mjs</span>
+        </div>
+        <div class="illus-row">
+          <div class="illus"><img src="assets/generated/illustrations/illustration_paired.svg" alt="Paired illustration"></div>
+          <div class="illus"><img src="assets/generated/illustrations/illustration_letter.svg" alt="Letter illustration"></div>
+          <div class="illus"><img src="assets/generated/illustrations/illustration_milestone.svg" alt="Milestone illustration"></div>
+          <div class="illus"><img src="assets/generated/illustrations/illustration_bucket.svg" alt="Bucket list illustration"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================ LANDING CALLOUT ======================== -->
+<div class="wrap">
+  <section class="rule">
+    <div class="callout reveal">
+      <div class="split callout-split">
+        <div>
+          <p class="eyebrow">Included, not bolted on</p>
+          <h2 style="font-size:clamp(27px,3.2vw,38px)">The landing page is part of the design system.</h2>
+          <p class="lede" style="margin-top:18px;font-size:15.5px">
+            A system that only works inside a 390px phone frame isn't a system. The marketing page is
+            built from the same CSS blocks and tokens as the app — so the site, the store listing and
+            the product can't visibly wobble.
+          </p>
+        </div>
+        <div>
+          <div class="chips">
+            <span class="chip accent">One promise, ≤ 8 words</span>
+            <span class="chip accent">CTA above the fold at 360px</span>
+            <span class="chip">One section per objection</span>
+            <span class="chip">Real screenshots, never fabricated</span>
+            <span class="chip">Title · description · canonical</span>
+            <span class="chip">OG card at 1200 × 628</span>
+            <span class="chip">JSON-LD for the app</span>
+            <span class="chip">Favicon that survives 16px</span>
+            <span class="chip">LCP &lt; 2.5s · CLS &lt; 0.1</span>
+            <span class="chip">Works with JS off</span>
+            <span class="chip">Same contrast gate</span>
+            <span class="chip">Events with a location</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================= PRINCIPLES ============================ -->
+<div class="wrap">
+  <section class="rule">
+    <div class="reveal" style="max-width:40ch;margin-bottom:44px">
+      <p class="eyebrow">Why it holds up</p>
+      <h2>Three rules it will not break.</h2>
+    </div>
+    <div class="principles">
+      <div class="principle reveal">
+        <div class="glyph">Aa</div>
+        <h4>Semantic tokens only</h4>
+        <p>UI code references names like <span class="mono">textSecondary</span>, never a hex. Raw values live in one file and the generators, so a palette change is one edit.</p>
+      </div>
+      <div class="principle reveal">
+        <div class="glyph">4.5</div>
+        <h4>The gate is a hard stop</h4>
+        <p>Every semantic pair is checked in both directions, and the minimum is never lowered to make a palette pass. If it fails, the tokens change.</p>
+      </div>
+      <div class="principle reveal">
+        <div class="glyph">↻</div>
+        <h4>Purity by construction</h4>
+        <p>If iOS and Android ever need separate hand edits, the generator is missing a rule. The same script emits both, or the script is wrong.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- =============================== INSTALL ============================= -->
+<div class="wrap" id="install">
+  <section class="rule">
+    <div class="reveal" style="max-width:42ch">
+      <p class="eyebrow">Install</p>
+      <h2>Three ways in, one of them is a sentence.</h2>
+    </div>
+
+    <div class="install-grid">
+      <div class="install-card reveal">
+        <h4>As a skill</h4>
+        <p>Clone it, then drop it where your agent looks for skills.</p>
+        <div class="cmd"><button class="copy" data-copy="git clone --depth 1 https://github.com/shuence/design-storyboard.git /tmp/ds && mkdir -p ~/.agents/skills && cp -R /tmp/ds/skills/design-storyboard ~/.agents/skills/">copy</button>git clone --depth 1 \
+  https://github.com/shuence/design-storyboard.git /tmp/ds
+mkdir -p ~/.agents/skills
+cp -R /tmp/ds/skills/design-storyboard ~/.agents/skills/</div>
+      </div>
+
+      <div class="install-card reveal">
+        <h4>Claude Code / OpenCode</h4>
+        <p>Both read <span class="mono">~/.claude/skills</span>. One symlink keeps them in sync.</p>
+        <div class="cmd"><button class="copy" data-copy="ln -sfn ../../.agents/skills/design-storyboard ~/.claude/skills/design-storyboard">copy</button>ln -sfn ../../.agents/skills/design-storyboard \
+  ~/.claude/skills/design-storyboard</div>
+      </div>
+
+      <div class="install-card reveal" style="grid-column:1/-1">
+        <h4>Or just the prompt</h4>
+        <p>No install, no repo access. Paste this into any agent that can write files.</p>
+        <div class="prompt-box">
+          <button class="copy" data-copy="Interview me about the app (promise, user, moment of use, platforms, must-nevers, competitors, existing brand assets), then ask for supporting materials. Then build the full design/ folder: 3 directions in directions.html, tokens.json plus a contrast checker that must pass, app.html as both storyboard and hi-fi mockup with a why on every screen, app-icons.mjs emitting iOS and Android launcher assets, a logo and wordmark review page, illustrations.mjs for empty states, content packs, a landing page on the same tokens with real metadata and an OG card, and a store pipeline that generates and headless-renders every App Store and Play size. Everything generated and re-runnable, nothing hand-drawn. Pause for sign-off after the directions and after the tokens, and paste real command output, never a claim.">copy</button>
+          <p>“Interview me about the app, then build the full <span class="mono">design/</span> folder: three directions, tokens plus a contrast gate, a storyboard, icons, illustrations, a landing page, content packs, and a store kit — all generated and re-runnable. Pause for sign-off after the directions and after the tokens, and paste real command output.”</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================================ FAQ ================================ -->
+<div class="wrap" id="faq">
+  <section class="rule">
+    <div class="split faq">
+      <div class="reveal">
+        <p class="eyebrow">Questions</p>
+        <h2 style="max-width:12ch">Before you ask</h2>
+      </div>
+      <div>
+        <details>
+          <summary>Is this a Figma replacement?</summary>
+          <p>No. Figma is where you explore with a team. This is where a design becomes buildable: tokens, real CSS, platform assets and a gate that fails CI. It's the folder you keep after the exploration is done.</p>
+        </details>
+        <details>
+          <summary>Do I need design experience?</summary>
+          <p>No, but you do need to answer the interview. The skill asks about the promise, the user, the moment of use and what the product must <em>never</em> do. If you skip that, you get a generic design — which is the failure mode this exists to avoid.</p>
+        </details>
+        <details>
+          <summary>Does it work for iOS and Android?</summary>
+          <p>Yes, natively. Icons and illustrations are emitted for both from one source: opaque full-bleed <code>.appiconset</code>s for iOS, and 108dp adaptive layers with a real <code>&lt;monochrome&gt;</code> drawable for Android. Tokens are mirrored into Kotlin and Swift.</p>
+        </details>
+        <details>
+          <summary>What if I already have a brand?</summary>
+          <p>Bring it to the interview — logo, licensed typefaces, brand hexes. Phase 1 is explicitly about inventorying what's reusable before inventing anything. It won't replace a mark you already ship.</p>
+        </details>
+        <details>
+          <summary>Why does it insist on a contrast checker?</summary>
+          <p>Because “accessible enough” is an opinion until it's a failing build. Every semantic pair is tested in both directions, and the minimum is never lowered to make a palette pass. It's the only automated gate in the folder, so it has to be real.</p>
+        </details>
+        <details>
+          <summary>Where do the screenshots come from?</summary>
+          <p>Headless Chrome. A generator writes the artboard HTML at the exact required size, adds the right platform chrome, and screenshots it. Nothing is exported by hand, so a token change updates every listing on the next run.</p>
+        </details>
+        <details>
+          <summary>Which agents can run it?</summary>
+          <p>Any agent that can read files and run Node: Claude Code, Codex, OpenCode, Cursor, Windsurf. The skill is just markdown plus three small scripts — there is no plugin API to depend on.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================== FINAL CTA ============================ -->
+<div class="wrap">
+  <section class="final">
+    <div class="reveal">
+      <h2>Ship a <em>folder</em>, not a moodboard.</h2>
+      <p class="lede">Interview in. Storyboard, mockups, landing page, icons, illustrations and store kit out — all from one tokens file.</p>
+      <div class="hero-actions" style="justify-content:center">
+        <a class="btn primary" href="https://github.com/shuence/design-storyboard">Install the skill <span class="arrow">→</span></a>
+        <a class="btn ghost" href="#faq">Read the questions</a>
+      </div>
+      <p class="hero-note">MIT licensed · No npm install · Renders offline with <span class="mono">file://</span></p>
+    </div>
+  </section>
+</div>
+
+<!-- =============================== FOOTER ============================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot-brand">
+        <span class="wordmark">design<span>–</span>storyboard</span>
+        <p>An agent skill for people who ship apps. Built on the recipe from momo's design folder.</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <b>Skill</b>
+          <a href="#build">What it builds</a>
+          <a href="#concepts">Concept packs</a>
+          <a href="#workflow">Workflow</a>
+        </div>
+        <div class="foot-col">
+          <b>Repo</b>
+          <a href="https://github.com/shuence/design-storyboard">GitHub</a>
+          <a href="https://github.com/shuence/design-storyboard/blob/main/skills/design-storyboard/prompt.md">Prompt</a>
+          <a href="https://github.com/shuence/design-storyboard/blob/main/docs/NAMING_RESEARCH.md">Naming research</a>
+        </div>
+        <div class="foot-col">
+          <b>More</b>
+          <a href="#install">Install</a>
+          <a href="#faq">FAQ</a>
+          <a href="https://github.com/shuence/design-storyboard/blob/main/LICENSE">MIT license</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "design-storyboard",
+  "applicationCategory": "DesignApplication",
+  "operatingSystem": "macOS, Linux",
+  "description": "An agent skill that interviews you about your app, then generates the full design folder: storyboard, hi-fi mockups, landing page, logo, launcher icons, illustrations, content packs and store assets from one tokens file.",
+  "url": "https://design-storyboard.vercel.app/",
+  "license": "https://opensource.org/licenses/MIT",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<script>
+  // Copy buttons — real clipboard, real fallback, real feedback.
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-copy') || '';
+      var done = function () {
+        var old = btn.textContent;
+        btn.textContent = 'copied';
+        btn.classList.add('done');
+        setTimeout(function () { btn.textContent = old; btn.classList.remove('done'); }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () {});
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    });
+  });
+
+  // Reveal on scroll — skipped entirely when motion is reduced.
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = document.querySelectorAll('.reveal');
+  if (reduced || !('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    items.forEach(function (el) { io.observe(el); });
+  }
+</script>
+</body>
+</html>

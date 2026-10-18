@@ -1,0 +1,8 @@
+.DS_Store
+node_modules/
+*.log
+
+# generated icon/screenshot output is intentionally committed,
+# but these scratch dirs are not
+.design-scratch/
+tmp/

@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APP — the promise, in a few words</title>
+<meta name="description" content="One sentence, under 155 characters, with the outcome and the audience.">
+<link rel="canonical" href="https://example.com/">
+<meta property="og:title" content="APP — the promise">
+<meta property="og:description" content="The same sentence, written so it doesn't truncate badly.">
+<meta property="og:image" content="https://example.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="628">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DISPLAY_FAMILY&family=UI_FAMILY&display=swap" rel="stylesheet">
+
+<style>
+  /* =====================================================================
+     BLOCK 1 — TOKENS. Mirror design/tokens.json exactly. No new values.
+     ===================================================================== */
+  :root{
+    --bg:#FAF9F7; --surface:#FFFFFF; --soft:#F2EEEB; --line:#ECE7E3;
+    --ink:#151312; --ink2:#6E6763; --ink3:#A59D98;
+    --accent:#C93C55; --accent-deep:#7C2236; --accent-soft:#F8E6E9;
+    --r-sm:12px; --r-md:16px; --r-lg:22px; --r-xl:28px;
+    --display:"DISPLAY_FAMILY",Georgia,serif;
+    --ui:"UI_FAMILY",system-ui,-apple-system,sans-serif;
+    --max:1120px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0F0E0D; --surface:#1A1817; --soft:#24211F; --line:#2B2725;
+      --ink:#F5F1EE; --ink2:#A8A09B; --ink3:#6F6863;
+      --accent:#F07C8E; --accent-soft:#3A2126;
+    }
+  }
+
+  /* =====================================================================
+     BLOCK 2 — PAGE
+     ===================================================================== */
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--ui);
+       font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .serif{font-family:var(--display);font-weight:400;letter-spacing:-.02em}
+
+  /* nav */
+  .nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);
+       background:color-mix(in srgb,var(--bg) 88%,transparent);
+       border-bottom:1px solid var(--line)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .wordmark{font-weight:600;font-size:18px;letter-spacing:-.03em}
+  .wordmark b{color:var(--accent)}
+  .nav nav{display:flex;gap:26px;font-size:14px;color:var(--ink2)}
+  .nav nav a:hover{color:var(--ink)}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+       height:52px;padding:0 24px;border-radius:var(--r-md);
+       font:600 15px/1 var(--ui);cursor:pointer;border:0}
+  .btn.primary{background:var(--ink);color:var(--bg)}
+  .btn.accent{background:var(--accent);color:#fff}
+  .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+  .btn.link{height:auto;padding:0;background:none;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+
+  /* sections */
+  section{padding:96px 0}
+  .eyebrow{font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--ink2);
+           text-transform:none;margin-bottom:14px}
+  h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.02em;line-height:1.04}
+  h1{font-size:clamp(40px,6vw,72px)}
+  h2{font-size:clamp(30px,4vw,46px);margin-bottom:18px}
+  h3{font-size:22px;line-height:1.2;margin-bottom:8px}
+  .lede{font-size:clamp(17px,2vw,20px);line-height:1.5;color:var(--ink2);max-width:52ch}
+  .muted{color:var(--ink2)}
+  .accent{color:var(--accent)}
+
+  /* =====================================================================
+     BLOCK 3 — HERO
+     ===================================================================== */
+  .hero{padding:72px 0 88px;display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+  .hero h1{margin-bottom:20px}
+  .hero .lede{margin-bottom:28px}
+  .hero-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .hero-note{font-size:13px;color:var(--ink3);margin-top:16px}
+  @media (max-width:900px){
+    .hero{grid-template-columns:1fr;gap:40px;padding:48px 0 64px}
+    .hero-art{order:-1}
+  }
+
+  /* device frame — the app's real chrome, not a drawn one */
+  .device{width:min(320px,100%);margin:0 auto;aspect-ratio:390/844;border-radius:46px;
+          padding:10px;background:#121110;
+          box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 40px 80px -40px rgba(40,20,15,.55)}
+  .device .screen{position:relative;width:100%;height:100%;border-radius:38px;overflow:hidden;
+                  background:var(--bg);color:var(--ink)}
+  .device .screen img{width:100%;height:100%;object-fit:cover}
+  .device .island{position:absolute;top:12px;left:50%;transform:translateX(-50%);
+                  width:88px;height:24px;border-radius:999px;background:#000;z-index:2}
+
+  /* proof strip */
+  .proof{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+         padding:26px 0;display:flex;gap:40px;flex-wrap:wrap;
+         align-items:center;justify-content:center;font-size:13.5px;color:var(--ink2)}
+  .proof b{color:var(--ink);font-weight:600}
+
+  /* =====================================================================
+     BLOCK 4 — CONTENT
+     ===================================================================== */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+  .split.flip > :first-child{order:2}
+  @media (max-width:900px){
+    .split{grid-template-columns:1fr;gap:36px}
+    .split.flip > :first-child{order:0}
+  }
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;counter-reset:step}
+  .step{padding:28px;border-radius:var(--r-lg);background:var(--surface)}
+  .step:before{counter-increment:step;content:counter(step);
+               display:grid;place-items:center;width:34px;height:34px;margin-bottom:18px;
+               border-radius:999px;background:var(--soft);font:600 14px/1 var(--ui)}
+  @media (max-width:760px){.steps{grid-template-columns:1fr}}
+
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .card{padding:28px;border-radius:var(--r-lg);background:var(--surface)}
+  .card p{font-size:14.5px;color:var(--ink2)}
+  @media (max-width:760px){.cards{grid-template-columns:1fr}}
+
+  blockquote{font-family:var(--display);font-size:clamp(22px,3vw,32px);line-height:1.3;
+             letter-spacing:-.01em;max-width:24ch}
+  .attrib{display:flex;align-items:center;gap:12px;margin-top:22px;font-size:14px;color:var(--ink2)}
+  .attrib .face{width:38px;height:38px;border-radius:50%;object-fit:cover;flex:none}
+
+  details{border-bottom:1px solid var(--line);padding:20px 0}
+  details summary{display:flex;justify-content:space-between;align-items:center;gap:16px;
+                  cursor:pointer;font-weight:600;font-size:16px;list-style:none}
+  details summary::-webkit-details-marker{display:none}
+  details summary:after{content:"+";font-size:22px;color:var(--ink3);flex:none}
+  details[open] summary:after{content:"–"}
+  details p{margin-top:12px;font-size:15px;color:var(--ink2);max-width:62ch}
+
+  .final{text-align:center;padding:104px 0}
+  .final h2{margin-bottom:14px}
+  .final .lede{margin:0 auto 30px}
+
+  footer{border-top:1px solid var(--line);padding:48px 0 64px;font-size:13.5px;color:var(--ink2)}
+  footer .cols{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap}
+  footer a:hover{color:var(--ink)}
+
+  /* motion, only if the OS allows it */
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *{animation:none!important;transition:none!important}
+  }
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- ============================ NAV ============================ -->
+<header class="nav">
+  <div class="wrap">
+    <a class="wordmark" href="/">app<b>.</b></a>
+    <nav aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================ HERO ============================ -->
+<main>
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">For AUDIENCE</p>
+      <h1>THE OUTCOME, IN <em class="accent serif" style="font-style:italic">EIGHT WORDS</em>.</h1>
+      <p class="lede">One sentence explaining how it works, and why it's different from the thing they do today.</p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#get">GET STARTED</a>
+        <a class="btn link" href="#how">See how it works</a>
+      </div>
+      <p class="hero-note">No account needed to try · PRIVACY CLAIM · PLATFORM AVAILABILITY</p>
+    </div>
+
+    <div class="hero-art reveal">
+      <!-- Real device chrome. Replace the img with a real screenshot from the app. -->
+      <div class="device" role="img" aria-label="The app's home screen">
+        <div class="screen">
+          <div class="island"></div>
+          <img src="app-screen.png" alt="" width="390" height="844" fetchpriority="high">
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================ PROOF ============================ -->
+<div class="wrap">
+  <div class="proof">
+    <span><b>12,000</b> people use it weekly</span>
+    <span><b>4.9</b> on the App Store</span>
+    <span><b>PRIVACY</b> — nothing is public</span>
+    <span><b>FREE</b> to start</span>
+  </div>
+</div>
+
+<!-- ============================ PROBLEM ============================ -->
+<div class="wrap">
+  <section class="split">
+    <div>
+      <p class="eyebrow">The problem</p>
+      <h2>WHAT THEY DO TODAY, AND WHY IT DOESN'T WORK</h2>
+      <p class="lede">Describe the status quo in the user's own words — the workaround, the annoyance, the thing they've given up on.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><h3>The workaround</h3><p>Why the current tool fails at this specific job.</p></div>
+      <div class="card"><h3>The cost</h3><p>What it costs them — time, money, or the thing itself.</p></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================ HOW IT WORKS ============================ -->
+<div class="wrap">
+  <section id="how">
+    <p class="eyebrow">How it works</p>
+    <h2>THREE STEPS, ONE SENTENCE EACH</h2>
+    <div class="steps">
+      <div class="step"><h3>First</h3><p>What the user does first. One sentence, no jargon.</p></div>
+      <div class="step"><h3>Then</h3><p>What happens as a result. Make it feel inevitable.</p></div>
+      <div class="step"><h3>After that</h3><p>What they get, and how often. Be concrete.</p></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================ PAYOFF ============================ -->
+<div class="wrap">
+  <section class="split flip">
+    <div>
+      <p class="eyebrow">The payoff</p>
+      <h2>WHAT THEY GET BACK</h2>
+      <p class="lede">The section that converts. Lead with the emotional result, then prove it with a specific.</p>
+      <ul class="muted" style="margin-top:22px;padding-left:20px;display:grid;gap:10px;font-size:15px">
+        <li>Specific benefit with a number.</li>
+        <li>Specific benefit with a time frame.</li>
+        <li>Specific benefit that removes a worry.</li>
+      </ul>
+    </div>
+    <div class="hero-art reveal">
+      <div class="device" role="img" aria-label="A second real screen">
+        <div class="screen"><div class="island"></div><img src="app-screen-2.png" alt="" width="390" height="844" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================ OBJECTIONS ============================ -->
+<div class="wrap">
+  <section>
+    <p class="eyebrow">Before you ask</p>
+    <h2>THE FOUR THINGS YOU'RE WONDERING</h2>
+    <div class="cards">
+      <div class="card"><h3>"Is my data private?"</h3><p>Answer plainly, and say what you do <em>not</em> collect.</p></div>
+      <div class="card"><h3>"How long does setup take?"</h3><p>Give a number. Then explain what makes it that fast.</p></div>
+      <div class="card"><h3>"Do I have to pay?"</h3><p>State exactly what's free and where the line is.</p></div>
+      <div class="card"><h3>"What if I already use X?"</h3><p>Name the competitor. Explain the coexistence, not a takedown.</p></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================ QUOTE ============================ -->
+<div class="wrap">
+  <section>
+    <blockquote class="serif">"A real sentence a real person said, long enough to be specific and short enough to read once."</blockquote>
+    <div class="attrib">
+      <img class="face" src="person.jpg" alt="" width="38" height="38" loading="lazy">
+      <span><b style="color:var(--ink)">Full Name</b> · what they do</span>
+    </div>
+  </section>
+</div>
+
+<!-- ============================ FAQ ============================ -->
+<div class="wrap">
+  <section id="faq">
+    <p class="eyebrow">FAQ</p>
+    <h2>QUESTIONS SUPPORT ACTUALLY GETS</h2>
+    <div style="margin-top:12px">
+      <details><summary>Does it work on both iPhone and Android?</summary><p>Answer with the real platforms and any gap.</p></details>
+      <details><summary>Can I delete my account and my data?</summary><p>Say how, and how long it takes.</p></details>
+      <details><summary>Is there a free plan?</summary><p>State the limits without an upsell paragraph.</p></details>
+      <details><summary>What happens if I stop paying?</summary><p>Be explicit. This is where trust is won.</p></details>
+      <details><summary>Do you use my content to train anything?</summary><p>If the answer is no, say no in one word first.</p></details>
+    </div>
+  </section>
+</div>
+
+<!-- ============================ FINAL CTA ============================ -->
+<div class="wrap">
+  <section class="final" id="get">
+    <h2>RESTATE THE PROMISE</h2>
+    <p class="lede">One last sentence that removes the last hesitation.</p>
+    <a class="btn primary" href="#" style="height:56px;padding:0 32px">GET STARTED</a>
+  </section>
+</div>
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer>
+  <div class="wrap cols">
+    <div>
+      <div class="wordmark" style="margin-bottom:10px">app<b>.</b></div>
+      <p>© YEAR Company. All rights reserved.</p>
+    </div>
+    <div style="display:flex;gap:48px;flex-wrap:wrap">
+      <div style="display:grid;gap:8px"><b style="color:var(--ink)">Product</b><a href="#how">How it works</a><a href="#pricing">Pricing</a></div>
+      <div style="display:grid;gap:8px"><b style="color:var(--ink)">Legal</b><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div>
+      <div style="display:grid;gap:8px"><b style="color:var(--ink)">Support</b><a href="mailto:hello@example.com">Email</a><a href="#faq">FAQ</a></div>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "APP",
+  "description": "The same one-sentence description.",
+  "applicationCategory": "APPLICATION_CATEGORY",
+  "operatingSystem": "iOS, Android",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<script>
+  // Progressive reveal. Content is visible without JS if this fails.
+  const els = document.querySelectorAll('.reveal');
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }, { rootMargin: '0px 0px -12% 0px' });
+    els.forEach((el) => io.observe(el));
+  } else {
+    els.forEach((el) => el.classList.add('in'));
+  }
+</script>
+</body>
+</html>

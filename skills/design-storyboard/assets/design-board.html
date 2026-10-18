@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App · store asset design board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DISPLAY_FAMILY&family=UI_FAMILY&display=swap" rel="stylesheet">
+<style>
+  /* ============ tokens — must mirror design/tokens.json ============ */
+  :root{
+    --bg:#FAF9F7; --surface:#FFFFFF; --soft:#F2EEEB; --line:#ECE7E3;
+    --ink:#151312; --ink2:#6E6763; --ink3:#A59D98;
+    --accent:#C93C55; --accent-deep:#7C2236; --accent-light:#E9798B;
+    --r-sm:12px; --r-md:16px; --r-lg:22px; --r-xl:28px;
+    --display:"DISPLAY_FAMILY",Georgia,serif;
+    --ui:"UI_FAMILY",system-ui,sans-serif;
+  }
+  .dark{
+    --bg:#0F0E0D; --surface:#1A1817; --soft:#24211F; --line:#2B2725;
+    --ink:#F5F1EE; --ink2:#A8A09B; --ink3:#6F6863; --accent:#F07C8E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  img{display:block;max-width:100%}
+  body{background:#E7E3DF;color:#151312;font-family:var(--ui);-webkit-font-smoothing:antialiased}
+
+  /* ============ page ============ */
+  .page-head{max-width:1480px;margin:0 auto;padding:64px 40px 8px;
+             display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end}
+  .page-head h1{font-family:var(--display);font-weight:400;font-size:72px;line-height:.95;letter-spacing:-.02em}
+  .page-head h1 em{color:var(--accent)}
+  .page-head p{font-size:15px;line-height:1.65;color:#5f5853;max-width:58ch}
+
+  .section{max-width:1480px;margin:0 auto;padding:56px 40px 8px}
+  .section > h2{font-family:var(--display);font-weight:400;font-size:40px;letter-spacing:-.01em;
+                border-top:1px solid #151312;padding-top:16px;margin-bottom:8px}
+  .section > p{font-size:14px;color:#5f5853;max-width:70ch;margin-bottom:24px}
+
+  /* ============ brand: wordmark lockups ============ */
+  .lockups{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+  .lockup{background:var(--bg);border-radius:var(--r-lg);padding:32px 28px;display:flex;
+          flex-direction:column;gap:14px;min-height:150px;justify-content:center}
+  .lockup.dark-ground{background:#151312;color:#F5F1EE}
+  .wordmark{font-family:var(--ui);font-weight:600;font-size:28px;letter-spacing:-.03em;line-height:1}
+  .wordmark b{color:var(--accent)}
+  .lockup .note{font-size:12px;color:#6E6763}
+  .lockup.dark-ground .note{color:#A8A09B}
+
+  /* ============ brand: icon at real sizes ============ */
+  .icons{display:flex;align-items:flex-end;gap:28px;flex-wrap:wrap}
+  .icons figure{display:flex;flex-direction:column;align-items:center;gap:10px}
+  .icons img{border-radius:22.5%;box-shadow:0 6px 18px -8px rgba(40,20,15,.45)}
+  .icons figcaption{font-size:11.5px;color:#6E6763}
+  .icons .n16 img{width:16px}  .icons .n32 img{width:32px}
+  .icons .n64 img{width:64px}  .icons .n128 img{width:128px}
+  .icons .n1024 img{width:180px}
+
+  /* ============ store artboards grid ============ */
+  .boards{display:flex;gap:24px;overflow-x:auto;padding:8px 4px 24px;scrollbar-width:thin}
+  .boards figure{flex:none;width:260px;display:flex;flex-direction:column;gap:10px}
+  .boards img{width:100%;border-radius:10px;border:1px solid rgba(0,0,0,.08);background:#fff}
+  .boards figcaption{font-size:12px;color:#5f5853}
+  .boards figcaption b{display:block;color:#151312;font-weight:600;font-size:13px}
+
+  /* ============ misuse ============ */
+  .misuse{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:18px}
+  .misuse figure{background:#fff;border-radius:var(--r-md);padding:20px;display:grid;place-items:center;
+                 min-height:120px;position:relative}
+  .misuse figcaption{font-size:11.5px;color:#B3261E;margin-top:10px;text-align:center}
+  .misuse .stretch img{width:150px;height:60px;object-fit:fill}
+  .misuse .shadow img{filter:drop-shadow(0 10px 8px rgba(0,0,0,.5))}
+  .misuse .rotate img{transform:rotate(-14deg)}
+  .misuse .outline img{filter:grayscale(1) contrast(2)}
+</style>
+</head>
+<body>
+
+<header class="page-head">
+  <h1>App, <em>on the store shelf.</em></h1>
+  <p>Every Apple and Google asset, rendered from the design system rather than drawn by hand.
+     Brand definition, icon at real sizes, all screenshot artboards, and the rules that keep the
+     icon from being stretched by the next person who touches it.</p>
+</header>
+
+<!-- ============ 1. WORDMARK ============ -->
+<section class="section">
+  <h2>Wordmark</h2>
+  <p>One wordmark, no lockup, no monogram. Lowercase, UI sans at 600, tracking -.03em, closed by an
+     accent full stop. Light grounds only.</p>
+  <div class="lockups">
+    <div class="lockup"><div class="wordmark">app<b>.</b></div><div class="note">Primary · 28px</div></div>
+    <div class="lockup"><div class="wordmark" style="font-size:18px">app<b>.</b></div><div class="note">Minimum · 18px (app bar)</div></div>
+    <div class="lockup dark-ground"><div class="wordmark">app<b>.</b></div><div class="note">Reversed — allowed only on ink, never on accent</div></div>
+    <div class="lockup"><div class="wordmark" style="font-size:18px">app<b>.</b></div>
+      <div class="note">Clear space = cap height on all sides</div></div>
+  </div>
+</section>
+
+<!-- ============ 2. ICON ============ -->
+<section class="section">
+  <h2>App icon</h2>
+  <p>Two overlapping circles. 1024 canvas, r 225, centres ±129. Opaque, no alpha, no drawn corners.
+     Android is a 108dp layer with a ~66dp safe zone.</p>
+  <div class="icons">
+    <figure class="n16"><img src="ios/app-icon/app-icon-1024.png" alt=""><figcaption>16 px</figcaption></figure>
+    <figure class="n32"><img src="ios/app-icon/app-icon-1024.png" alt=""><figcaption>32 px</figcaption></figure>
+    <figure class="n64"><img src="ios/app-icon/app-icon-1024.png" alt=""><figcaption>64 px</figcaption></figure>
+    <figure class="n128"><img src="ios/app-icon/app-icon-1024.png" alt=""><figcaption>128 px</figcaption></figure>
+    <figure class="n1024"><img src="ios/app-icon/app-icon-1024.png" alt=""><figcaption>1024 px</figcaption></figure>
+  </div>
+</section>
+
+<!-- ============ 3. SCREENSHOTS ============ -->
+<section class="section">
+  <h2>Store screenshots</h2>
+  <p>Ordered. The first two carry the most weight. Each is one claim with one headline.</p>
+  <div class="boards">
+    <figure><img src="ios/iphone-6.9/01-welcome.png" alt="">
+      <figcaption><b>01 · Welcome</b>The promise, in five words.</figcaption></figure>
+    <figure><img src="ios/iphone-6.9/02-home.png" alt="">
+      <figcaption><b>02 · The core loop</b>What you do daily.</figcaption></figure>
+    <figure><img src="ios/iphone-6.9/03-payoff.png" alt="">
+      <figcaption><b>03 · The payoff</b>What you get back.</figcaption></figure>
+  </div>
+</section>
+
+<!-- ============ 4. MISUSE ============ -->
+<section class="section">
+  <h2>Never</h2>
+  <p>This is the section that protects the brand after handoff.</p>
+  <div class="misuse">
+    <figure class="stretch"><img src="ios/app-icon/app-icon-1024.png" alt=""><figcaption>Stretched</figcaption></figure>
+    <figure class="rotate"><img src="ios/app-icon/app-icon-1024.png" alt=""><figcaption>Rotated</figcaption></figure>
+    <figure class="shadow"><img src="ios/app-icon/app-icon-1024.png" alt=""><figcaption>Drop shadow</figcaption></figure>
+    <figure class="outline"><img src="ios/app-icon/app-icon-1024.png" alt=""><figcaption>Recoloured</figcaption></figure>
+  </div>
+</section>
+
+<p style="max-width:1480px;margin:24px auto 0;padding:0 40px 80px;font-size:12.5px;color:#6E6763">
+  Generated by <code>store/build/design_board.py</code>. Do not edit by hand — tokens come from
+  <code>design/tokens.json</code> and artboards from <code>app.html</code>.
+</p>
+
+</body>
+</html>
