@@ -132,17 +132,63 @@ export function renderBrandFiles() {
 }
 
 // ---------------------------------------------------------------------
+// Raster output.
+//
+// The PNGs come from the same string as the SVGs, so a logo handed to an
+// App Store form cannot differ from the one in the site's nav. SVG is
+// rendered by ImageMagick, which delegates to rsvg-convert (`svg =>
+// rsvg-convert`): the same path skills/design-storyboard/assets/
+// app-icons.mjs already uses for iOS PNGs.
+//
+// Rasterised once per variant at ~1250px and downsampled, so the 16px
+// favicon is a filtered reduction of a large render rather than a
+// separate small one that would lose the petal tips.
+// ---------------------------------------------------------------------
+export const LOGO_DIR = "assets/generated/logo";
+
+// Which sizes each rendition is actually needed at. Not a cross product:
+// nobody needs a 16px rose tile.
+export const PNG_SIZES = {
+  ink:   [1024, 512, 256, 240, 180, 128, 64, 32, 16], // icon master, Product Hunt thumbnail, favicon/PWA set
+  light: [1024, 512, 256, 128, 64],              // transparent, for light grounds
+  white: [1024, 512, 256, 128, 64],              // transparent, for dark grounds
+  deep:  [1024, 512, 256],
+  rose:  [1024, 512, 256],
+  mono:  [1024, 512, 256],                       // single colour
+};
+
+export function pngTargets() {
+  const out = [];
+  for (const [variant, sizes] of Object.entries(PNG_SIZES)) {
+    for (const size of sizes) {
+      out.push({
+        variant,
+        size,
+        path: `${LOGO_DIR}/design-storyboard-${variant}-${size}.png`,
+      });
+    }
+  }
+  return out;
+}
+
+// ---------------------------------------------------------------------
 // CLI
 // ---------------------------------------------------------------------
 const isMain = process.argv[1] && import.meta.url.endsWith(process.argv[1].split("/").pop());
 if (isMain) {
-  const { readFileSync, writeFileSync, existsSync } = await import("node:fs");
+  const { readFileSync, writeFileSync, existsSync, mkdirSync, mkdtempSync, rmSync } =
+    await import("node:fs");
+  const { execFileSync } = await import("node:child_process");
   const { fileURLToPath } = await import("node:url");
-  const { dirname, resolve } = await import("node:path");
+  const { dirname, resolve, join } = await import("node:path");
+  const { tmpdir } = await import("node:os");
+
   const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
   const check = process.argv.includes("--check");
-
+  const skipPng = process.argv.includes("--no-png");
   let stale = 0;
+
+  // ---- vector -------------------------------------------------------
   for (const f of renderBrandFiles()) {
     const abs = resolve(root, f.path);
     const before = existsSync(abs) ? readFileSync(abs, "utf8") : null;
@@ -159,8 +205,91 @@ if (isMain) {
     }
   }
 
+  // ---- raster -------------------------------------------------------
+  if (!skipPng) {
+    let magick = null;
+    try {
+      execFileSync("magick", ["-version"], { stdio: "ignore" });
+      magick = "magick";
+    } catch {
+      console.log("\n  note: ImageMagick (`magick`) not found — wrote SVG only.");
+      console.log("        PNGs need it because ImageMagick delegates SVG to rsvg-convert.");
+    }
+
+    if (magick && check) {
+      // Verify without rewriting. Dimensions, not bytes: PNG output is
+      // deterministic for one ImageMagick build but not across versions.
+      const targets = pngTargets();
+      let bad = 0;
+      for (const t of targets) {
+        const abs = resolve(root, t.path);
+        if (!existsSync(abs)) {
+          console.log(`  STALE ${t.path}  (missing)`);
+          stale++; bad++;
+          continue;
+        }
+        const got = execFileSync(magick, ["identify", "-format", "%wx%h", abs])
+          .toString().trim();
+        if (got !== `${t.size}x${t.size}`) {
+          console.log(`  STALE ${t.path}  expected ${t.size}x${t.size}, got ${got}`);
+          stale++; bad++;
+        }
+      }
+      console.log(
+        bad
+          ? `\n  ${bad} of ${targets.length} PNGs need re-rendering.`
+          : `\n  ok    ${targets.length} PNGs at the right size in ${LOGO_DIR}/`
+      );
+    } else if (magick) {
+      mkdirSync(resolve(root, LOGO_DIR), { recursive: true });
+      const tmp = mkdtempSync(join(tmpdir(), "ds-brand-"));
+      let made = 0;
+
+      for (const [variant, sizes] of Object.entries(PNG_SIZES)) {
+        // Dimensionless SVG (viewBox only) so `-density` alone decides the
+        // raster size instead of the width/height attributes.
+        const src = join(tmp, `${variant}.svg`);
+        writeFileSync(src, markSVG(variant));
+
+        const master = join(tmp, `${variant}-master.png`);
+        execFileSync(magick, [
+          "-background", "none", "-density", "1200",
+          src, `PNG32:${master}`,
+        ], { stdio: "ignore" });
+
+        const masterSize = execFileSync(magick, ["identify", "-format", "%w", master])
+          .toString().trim();
+
+        for (const size of sizes) {
+          const out = resolve(root, `${LOGO_DIR}/design-storyboard-${variant}-${size}.png`);
+          execFileSync(magick, [
+            master, "-filter", "Lanczos", "-resize", `${size}x${size}`,
+            "-strip", `PNG32:${out}`,
+          ], { stdio: "ignore" });
+
+          const got = execFileSync(magick, ["identify", "-format", "%wx%h", out])
+            .toString().trim();
+          if (got !== `${size}x${size}`) {
+            console.log(`  MISS  ${LOGO_DIR}/design-storyboard-${variant}-${size}.png  got ${got}`);
+            stale++;
+          } else {
+            made++;
+          }
+        }
+        console.log(`  ${variant.padEnd(6)} ${sizes.length} PNGs   (from a ${masterSize}px render)`);
+      }
+
+      rmSync(tmp, { recursive: true, force: true });
+      console.log(`\n${made} PNGs → ${LOGO_DIR}/`);
+    }
+  }
+
   if (check) {
-    console.log(stale ? `\n${stale} brand file(s) out of date. Run: node scripts/brand.mjs` : "\nbrand files in sync.");
+    console.log(
+      stale
+        ? `\n${stale} brand file(s) out of date. Run: node scripts/brand.mjs`
+        : `\nbrand files in sync.`
+    );
     process.exit(stale ? 1 : 0);
   }
   console.log("\nbrand files written.");

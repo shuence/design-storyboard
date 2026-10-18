@@ -4,18 +4,32 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<title>design-storyboard: your app deserves a design folder</title>
-<meta name="description" content="An agent skill that interviews you about your app, then generates the whole design/ folder: storyboard, hi-fi mockups, landing page, logo, launcher icons, illustrations, content packs and every store asset, from one tokens file.">
+<title>design-storyboard: the agent skill for your app's design folder</title>
+<meta name="description" content="An agent skill that interviews you about your app, then generates the whole design/ folder: storyboard, mockups, icons, illustrations and store screenshots.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="author" content="shuence">
 <link rel="canonical" href="https://design-storyboard.vercel.app/">
-<meta property="og:title" content="design-storyboard: your app deserves a design folder">
-<meta property="og:description" content="Storyboard, hi-fi mockups, landing page, logo, launcher icons, illustrations and a store kit. Generated from one tokens file.">
+<link rel="alternate" type="text/markdown" href="/index.md" title="design-storyboard as one Markdown file">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="design-storyboard">
+<meta property="og:locale" content="en">
+<meta property="og:url" content="https://design-storyboard.vercel.app/">
+<meta property="og:title" content="design-storyboard: the agent skill for your app's design folder">
+<meta property="og:description" content="Interview in. Storyboard, hi-fi mockups, landing page, logo, launcher icons, illustrations and a store kit out, all generated from one tokens file.">
 <meta property="og:image" content="https://design-storyboard.vercel.app/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="628">
-<meta property="og:type" content="website">
+<meta property="og:image:alt" content="design-storyboard: interview in, then a storyboard, mockups, landing page, icons, illustrations and a store kit out.">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="design-storyboard: the agent skill for your app's design folder">
+<meta name="twitter:description" content="Interview in. Storyboard, mockups, landing page, icons, illustrations and a store kit out, all generated from one tokens file.">
+<meta name="twitter:image" content="https://design-storyboard.vercel.app/og.png">
+<meta name="twitter:image:alt" content="design-storyboard: interview in, a whole design folder out.">
 <meta name="theme-color" content="#FAF9F7">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/generated/logo/design-storyboard-ink-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/generated/logo/design-storyboard-ink-180.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap" rel="stylesheet">
@@ -90,6 +104,12 @@
   button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   ::selection{background:var(--blush);color:var(--ink)}
   :focus-visible{outline:2px solid var(--rose);outline-offset:3px;border-radius:4px}
+  .skip{
+    position:absolute;left:-9999px;top:0;z-index:100;
+    background:var(--ink);color:#EDE7E3;padding:10px 16px;border-radius:0 0 var(--r-sm) 0;
+    font-size:13px;
+  }
+  .skip:focus{left:0}
 
   .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
   .mono{font-family:var(--mono);font-size:.92em;letter-spacing:-.01em}
@@ -477,6 +497,7 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
 <!-- ================================ NAV ================================ -->
 <header class="nav">
@@ -497,6 +518,8 @@
     </a>
   </div>
 </header>
+
+<main id="main">
 
 <!-- =============================== HERO ================================ -->
 <div id="top"></div>
@@ -757,11 +780,11 @@
           <span class="mono">app-icons.mjs</span>
         </div>
         <div class="icon-row">
-          <div class="icon-tile"><div class="frame"><img src="assets/generated/icons/default.svg" alt="Default launcher icon"></div><span>default</span></div>
-          <div class="icon-tile"><div class="frame"><img src="assets/generated/icons/deep.svg" alt="Deep launcher icon"></div><span>deep</span></div>
-          <div class="icon-tile"><div class="frame"><img src="assets/generated/icons/night.svg" alt="Night launcher icon"></div><span>night</span></div>
-          <div class="icon-tile"><div class="frame"><img src="assets/generated/icons/mono.svg" alt="Monochrome launcher icon"></div><span>mono</span></div>
-          <div class="icon-tile small"><div class="frame"><img src="assets/generated/icons/default.svg" alt=""></div><span>16px</span></div>
+          <div class="icon-tile"><div class="frame"><img src="assets/generated/icons/default.svg" width="1024" height="1024" alt="Default launcher icon"></div><span>default</span></div>
+          <div class="icon-tile"><div class="frame"><img src="assets/generated/icons/deep.svg" width="1024" height="1024" alt="Deep launcher icon"></div><span>deep</span></div>
+          <div class="icon-tile"><div class="frame"><img src="assets/generated/icons/night.svg" width="1024" height="1024" alt="Night launcher icon"></div><span>night</span></div>
+          <div class="icon-tile"><div class="frame"><img src="assets/generated/icons/mono.svg" width="1024" height="1024" alt="Monochrome launcher icon"></div><span>mono</span></div>
+          <div class="icon-tile small"><div class="frame"><img src="assets/generated/icons/default.svg" width="1024" height="1024" alt=""></div><span>16px</span></div>
         </div>
       </div>
 
@@ -771,10 +794,10 @@
           <span class="mono">illustrations.mjs</span>
         </div>
         <div class="illus-row">
-          <div class="illus"><img src="assets/generated/illustrations/illustration_paired.svg" alt="Paired illustration"></div>
-          <div class="illus"><img src="assets/generated/illustrations/illustration_letter.svg" alt="Letter illustration"></div>
-          <div class="illus"><img src="assets/generated/illustrations/illustration_milestone.svg" alt="Milestone illustration"></div>
-          <div class="illus"><img src="assets/generated/illustrations/illustration_bucket.svg" alt="Bucket list illustration"></div>
+          <div class="illus"><img src="assets/generated/illustrations/illustration_paired.svg" width="240" height="200" alt="Paired illustration"></div>
+          <div class="illus"><img src="assets/generated/illustrations/illustration_letter.svg" width="240" height="200" alt="Letter illustration"></div>
+          <div class="illus"><img src="assets/generated/illustrations/illustration_milestone.svg" width="240" height="200" alt="Milestone illustration"></div>
+          <div class="illus"><img src="assets/generated/illustrations/illustration_bucket.svg" width="240" height="200" alt="Bucket list illustration"></div>
         </div>
       </div>
     </div>
@@ -948,6 +971,8 @@ cp -R /tmp/ds/skills/design-storyboard ~/.agents/skills/</div>
   </section>
 </div>
 
+</main>
+
 <!-- =============================== FOOTER ============================== -->
 <footer>
   <div class="wrap">
@@ -984,20 +1009,224 @@ cp -R /tmp/ds/skills/design-storyboard ~/.agents/skills/</div>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "design-storyboard",
-  "applicationCategory": "DesignApplication",
-  "operatingSystem": "macOS, Linux",
-  "description": "An agent skill that interviews you about your app, then generates the full design folder: storyboard, hi-fi mockups, landing page, logo, launcher icons, illustrations, content packs and store assets from one tokens file.",
-  "url": "https://design-storyboard.vercel.app/",
-  "installUrl": "https://skills.sh/shuence/design-storyboard",
-  "codeRepository": "https://github.com/shuence/design-storyboard",
-  "sameAs": [
-    "https://github.com/shuence/design-storyboard",
-    "https://skills.sh/shuence/design-storyboard"
-  ],
-  "license": "https://opensource.org/licenses/MIT",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://design-storyboard.vercel.app/#website",
+      "url": "https://design-storyboard.vercel.app/",
+      "name": "design-storyboard",
+      "description": "An agent skill that interviews you about your app, then generates the whole design folder from one tokens file.",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://design-storyboard.vercel.app/#author" },
+      "license": "https://opensource.org/licenses/MIT"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://design-storyboard.vercel.app/#author",
+      "name": "shuence",
+      "url": "https://github.com/shuence",
+      "sameAs": ["https://github.com/shuence"]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://design-storyboard.vercel.app/#software",
+      "name": "design-storyboard",
+      "alternateName": "design-storyboard agent skill",
+      "applicationCategory": "DeveloperApplication",
+      "applicationSubCategory": "Design system and brand asset generator",
+      "operatingSystem": "macOS, Linux, Windows",
+      "runtimePlatform": "Node.js",
+      "softwareVersion": "1.0.0",
+      "isAccessibleForFree": true,
+      "license": "https://opensource.org/licenses/MIT",
+      "description": "An agent skill that interviews you about your app, then generates the whole design/ folder: design storyboard, hi-fi HTML mockups, landing page and OG card, logo and wordmark, iOS and Android launcher icons, illustrations, content packs and store screenshots, all from one tokens file.",
+      "url": "https://design-storyboard.vercel.app/",
+      "installUrl": "https://skills.sh/shuence/design-storyboard",
+      "codeRepository": "https://github.com/shuence/design-storyboard",
+      "softwareHelp": "https://design-storyboard.vercel.app/agent-skills/",
+      "author": { "@id": "https://design-storyboard.vercel.app/#author" },
+      "publisher": { "@id": "https://design-storyboard.vercel.app/#author" },
+      "datePublished": "2026-10-18",
+      "dateModified": "2026-10-19",
+      "image": "https://design-storyboard.vercel.app/og.png",
+      "screenshot": "https://design-storyboard.vercel.app/og.png",
+      "sameAs": [
+        "https://github.com/shuence/design-storyboard",
+        "https://skills.sh/shuence/design-storyboard"
+      ],
+      "keywords": "agent skill, design folder, design system generator, design tokens, DTCG tokens, Claude Code skill, Codex skill, Cursor skill, app icon generator, App Store screenshots, Android adaptive icon",
+      "featureList": [
+        "Interview-first: asks about the promise, the user and the moment of use before drawing anything",
+        "One tokens.json is the source of truth, so no artifact can drift",
+        "Hi-fi HTML mockups rendered with real CSS and real type, not flattened images",
+        "Logo, wordmark and launcher icons generated by one script",
+        "Opaque iOS .appiconset and 108dp Android adaptive layer with a monochrome drawable, from one source",
+        "Illustrations emitted as SVG and as Android VectorDrawable from the same paths",
+        "App Store and Play store screenshots rendered headlessly at every required size",
+        "A contrast checker that fails the build instead of offering an opinion",
+        "Kotlin and Swift token mirrors generated from the same file"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://design-storyboard.vercel.app/#source",
+      "name": "design-storyboard",
+      "codeRepository": "https://github.com/shuence/design-storyboard",
+      "license": "https://opensource.org/licenses/MIT",
+      "programmingLanguage": ["Markdown", "JavaScript", "HTML", "CSS"],
+      "targetProduct": { "@id": "https://design-storyboard.vercel.app/#software" },
+      "author": { "@id": "https://design-storyboard.vercel.app/#author" }
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://design-storyboard.vercel.app/#howto",
+      "name": "How to generate a design folder for your app with an agent skill",
+      "description": "Install the skill into a coding agent, answer the interview, and let it generate the whole design folder from one tokens file.",
+      "totalTime": "PT45M",
+      "tool": [
+        { "@type": "HowToTool", "name": "Claude Code" },
+        { "@type": "HowToTool", "name": "Codex" },
+        { "@type": "HowToTool", "name": "Cursor" },
+        { "@type": "HowToTool", "name": "OpenCode" }
+      ],
+      "supply": [
+        { "@type": "HowToSupply", "name": "Node.js" },
+        { "@type": "HowToSupply", "name": "Google Chrome" }
+      ],
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Install the skill",
+          "text": "Run npx skills add shuence/design-storyboard. It detects every supported agent on the machine and installs into each one."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Answer the interview",
+          "text": "Tell the skill the promise, the user, the moment of use, what the product must never do, which platforms you ship and who the competitors are."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Pick one of three directions",
+          "text": "The skill puts three real type and colour systems on the same screens. You choose one. This is the first deliberate stop."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Approve the tokens and pass the gate",
+          "text": "It writes DTCG design tokens, then the contrast checker has to exit zero before anything else is generated. This is the second deliberate stop."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Generate the folder",
+          "text": "It writes the storyboard, hi-fi mockups, logo, launcher icons, illustrations, content packs, the landing page with its OG card, and every store screenshot size."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 6,
+          "name": "Verify and mirror",
+          "text": "Run the generators, paste the output, name any placeholders, and emit the Kotlin and Swift token mirrors from the same tokens file."
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://design-storyboard.vercel.app/#concepts",
+      "name": "Concept packs shipped with the skill",
+      "numberOfItems": 10,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Psychology", "description": "Perception, attention, trust, and the manipulation patterns it refuses." },
+        { "@type": "ListItem", "position": 2, "name": "Type", "description": "Three pairings, then one. Scale, tracking, and a wordmark defined once." },
+        { "@type": "ListItem", "position": 3, "name": "Color", "description": "Palette, semantic aliases, accent reservation, and the contrast pairs that must pass." },
+        { "@type": "ListItem", "position": 4, "name": "Layout", "description": "One spacing scale, one radius scale, and screens that consume both." },
+        { "@type": "ListItem", "position": 5, "name": "Motion", "description": "Three durations, one easing family, and what reduced motion removes." },
+        { "@type": "ListItem", "position": 6, "name": "Screens", "description": "Three structures before the pick, then every state including empty, error and offline." },
+        { "@type": "ListItem", "position": 7, "name": "Logo", "description": "Mark, wordmark, launcher icon: three decisions in that order, tested at 16px." },
+        { "@type": "ListItem", "position": 8, "name": "Illustration", "description": "The SVG and VectorDrawable subset, so one file is genuinely one file." },
+        { "@type": "ListItem", "position": 9, "name": "Voice", "description": "One vocabulary. Errors, empty states and the copy deck written as design material." },
+        { "@type": "ListItem", "position": 10, "name": "Board", "description": "The one-page review, assembled from the real tokens and the real assets." }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://design-storyboard.vercel.app/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I install it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "One command: npx skills add shuence/design-storyboard. It detects your agents and installs into each one. The skill is listed on skills.sh, so npx skills update keeps it current. If you would rather not use the registry, clone the repo and copy skills/design-storyboard into ~/.agents/skills/ by hand."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this a Figma replacement?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Figma is where you explore with a team. This is where a design becomes buildable: tokens, real CSS, platform assets and a gate that fails CI. It is the folder you keep after the exploration is done."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need design experience?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, but you do need to answer the interview. The skill asks about the promise, the user, the moment of use and what the product must never do. If you skip that, you get a generic design, which is the failure mode this exists to avoid."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it work for iOS and Android?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, natively. Icons and illustrations are emitted for both from one source: opaque full-bleed .appiconsets for iOS, and 108dp adaptive layers with a real monochrome drawable for Android. Tokens are mirrored into Kotlin and Swift."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I already have a brand?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bring it to the interview: logo, licensed typefaces, brand hexes. Phase 1 is explicitly about inventorying what is reusable before inventing anything. It will not replace a mark you already ship."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does it insist on a contrast checker?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because \"accessible enough\" is an opinion until it is a failing build. Every semantic pair is tested in both directions, and the minimum is never lowered to make a palette pass. It is the only automated gate in the folder, so it has to be real."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where do the screenshots come from?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Headless Chrome. A generator writes the artboard HTML at the exact required size, adds the right platform chrome, and screenshots it. Nothing is exported by hand, so a token change updates every listing on the next run."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which agents can run it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Any agent that can read files and run Node: Claude Code, Codex, OpenCode, Cursor, Windsurf. The skill is just markdown plus three small scripts. There is no plugin API to depend on. npx skills add shuence/design-storyboard installs it into every supported agent it detects."
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
 

@@ -1,0 +1,31 @@
+{
+  "name": "design-storyboard",
+  "short_name": "design-storyboard",
+  "description": "An agent skill that interviews you about your app, then generates the whole design/ folder from one tokens file.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#FAF9F7",
+  "theme_color": "#FAF9F7",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/assets/generated/logo/design-storyboard-ink-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/generated/logo/design-storyboard-ink-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/generated/logo/design-storyboard-ink-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

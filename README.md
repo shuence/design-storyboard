@@ -159,12 +159,28 @@ No npm install. No build step. The design folder has to render offline with `fil
 `index.html` is the launch page for this skill. It is its own demo: same tokens, same contrast discipline, real metadata, an OG card rendered from `og.html`.
 
 ```bash
-node scripts/brand.mjs   # the mark → favicon.svg, launcher icons, nav lock-up
-node scripts/brand.mjs --check   # fail if any of them drifted
-./scripts/render-og.sh   # regenerates og.png at 1200×628
+node scripts/brand.mjs           # the mark → favicon.svg, launcher icons, nav lock-up, 28 PNGs
+node scripts/brand.mjs --check   # exit 1 if any of them drifted
+node scripts/brand.mjs --no-png  # vectors only, no ImageMagick needed
+./scripts/render-og.sh           # regenerates og.png at 1200×628
 ```
 
 The mark is one string in `scripts/brand.mjs`. `favicon.svg`, the four launcher icons on the landing page, the OG card, the README header and the whole `launch/` kit are all output of it, so the site and the launch assets cannot show two different logos.
+
+SVG is rasterised by ImageMagick, which delegates to `rsvg-convert` — the same path `app-icons.mjs` uses for iOS PNGs. One render per rendition at ~1250px, downsampled, so the 16px favicon is a filtered reduction of a big render rather than its own small drawing.
+
+### The PNG set
+
+`assets/generated/logo/` — every file has alpha, so the tile-less renditions drop onto any ground.
+
+| Rendition | Sizes | Use it for |
+|---|---|---|
+| `ink` | 1024 · 512 · 256 · 240 · 180 · 128 · 64 · 32 · 16 | App icon master, Product Hunt thumbnail (240), Apple touch icon (180), favicon fallback |
+| `light` | 1024 · 512 · 256 · 128 · 64 | Ink petals + rose heart, transparent — on light grounds |
+| `white` | 1024 · 512 · 256 · 128 · 64 | Bone petals, transparent — on dark grounds |
+| `deep` | 1024 · 512 · 256 | Deep-rose tile, for a tinted banner or launch cover |
+| `rose` | 1024 · 512 · 256 | Rose tile, the loudest of the tiles |
+| `mono` | 1024 · 512 · 256 | Single colour, transparent — Android `<monochrome>`, stamps, overlays |
 
 ---
 
