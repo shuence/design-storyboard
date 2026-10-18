@@ -1,6 +1,10 @@
 # <img src="assets/generated/icons/default.svg" width="38" height="38" valign="middle" alt=""> design-storyboard
 
-[![skills.sh](https://skills.sh/b/shuence/design-storyboard)](https://skills.sh/shuence/design-storyboard)
+<!-- The registry's own counting badge is https://skills.sh/b/shuence/design-storyboard,
+     but it answers "resource not found" until the registry has tallied an install,
+     so the README would show a broken image. Swap the line below back to it once
+     https://skills.sh/shuence/design-storyboard reports a non-zero install count. -->
+[![listed on skills.sh](https://img.shields.io/badge/skills.sh-listed-C93C55?labelColor=151312)](https://skills.sh/shuence/design-storyboard)
 
 **Your app deserves a design folder.**
 

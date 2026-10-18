@@ -67,7 +67,7 @@ export const MARK_VARIANTS = {
   white: { tile: null,      petal: "#FAF9F7", heart: "#FAF9F7" },
   // Flat porcelain tile, single ink colour. The "mono" rendition shown
   // on the landing page's icon row.
-  porcelain: { tile: "#FAF6F3", petal: "#151312", heart: "#151312" },
+  porcelain: { tile: "#FAF9F7", petal: "#151312", heart: "#151312" },
 };
 
 /**
