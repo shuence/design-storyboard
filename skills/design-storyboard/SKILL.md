@@ -26,18 +26,28 @@ If you catch yourself writing a PNG into git, stop and write the generator inste
 
 The complete `design/` folder, in the product repo. `store/design-board.html` is the one-page review of that folder. It is not a substitute for `tokens.json`, `redesign/app.html`, the icon and illustration generators, the landing page, or the store kit.
 
-A concept skill is how you design one part of the folder. Read it at the phase named, then write the files that phase already names.
-
-| Phase | Read first |
-|---|---|
-| 2 Directions | [concepts/color/SKILL.md](concepts/color/SKILL.md), [concepts/type/SKILL.md](concepts/type/SKILL.md), [concepts/screens/SKILL.md](concepts/screens/SKILL.md) |
-| 3 Tokens | [concepts/psychology/SKILL.md](concepts/psychology/SKILL.md), color, type, [concepts/layout/SKILL.md](concepts/layout/SKILL.md), [concepts/motion/SKILL.md](concepts/motion/SKILL.md) |
-| 4 Storyboard | screens, layout, [concepts/voice/SKILL.md](concepts/voice/SKILL.md) |
-| 5 Logo and icons | [concepts/logo/SKILL.md](concepts/logo/SKILL.md) |
-| 6 Illustrations | [concepts/illustration/SKILL.md](concepts/illustration/SKILL.md) |
-| 9 Store board | [concepts/board/SKILL.md](concepts/board/SKILL.md) |
+A concept skill is how you design one part of the folder. Read it at the phase named in the table below, then write the files that phase already names.
 
 If they name one part ("color concepts", "font concepts", "just the screens", "illustration of …", "render this png"), do that part only, and still write it into `design/`. Say which folder files you did not generate.
+
+## Concept packs — `concepts/`
+Ten short constraint files. They are not chapters; each owns one slice of `tokens.json` (or one artifact) and names the exact files it writes. Read the one the current phase needs, not all ten.
+
+| File | Owns | Read at |
+|---|---|---|
+| [`concepts/psychology/SKILL.md`](concepts/psychology/SKILL.md) | perception, attention, trust, manipulation limits | Phase 2, re-check at 11 |
+| [`concepts/type/SKILL.md`](concepts/type/SKILL.md) | `typography`, font loading, the wordmark's family | Phase 2 → 3 |
+| [`concepts/color/SKILL.md`](concepts/color/SKILL.md) | `color`, `semantic`, `contrastChecks`, dark remap | Phase 3 |
+| [`concepts/layout/SKILL.md`](concepts/layout/SKILL.md) | `spacing`, `radius`, `size`, component CSS | Phase 3 → 4 |
+| [`concepts/motion/SKILL.md`](concepts/motion/SKILL.md) | `motion`, reduced-motion behaviour | Phase 3 → 4 |
+| [`concepts/screens/SKILL.md`](concepts/screens/SKILL.md) | `directions.html` structures, `app.html` screens | Phase 4 |
+| [`concepts/logo/SKILL.md`](concepts/logo/SKILL.md) | `logo-icon.html`, `app-icons.mjs` | Phase 5 |
+| [`concepts/illustration/SKILL.md`](concepts/illustration/SKILL.md) | `illustrations.mjs` | Phase 6 |
+| [`concepts/voice/SKILL.md`](concepts/voice/SKILL.md) | screen copy, empty/error states, packs, landing copy | Phase 7 → 8 |
+| [`concepts/board/SKILL.md`](concepts/board/SKILL.md) | `store/design-board.html` | Phase 9 |
+
+Rule for all ten: they may add a constraint, never a second scale. If a concept file and `tokens.json` disagree, `tokens.json` wins and the concept file is wrong.
+
 
 ## Workflow
 
@@ -61,24 +71,6 @@ Write `redesign/directions.html`: the same three screens rendered **three ways**
 Present it, get a pick, and record the loser directions in one line each — future you will ask "why isn't this Fraunces?".
 
 Reference: [`references/04-storyboard-and-mockups.md`](references/04-storyboard-and-mockups.md).
-
-### Concept packs — `concepts/`
-Ten short constraint files. They are not chapters; each owns one slice of `tokens.json` (or one artifact) and names the exact files it writes. Read the one the current phase needs, not all ten.
-
-| File | Owns | Read at |
-|---|---|---|
-| [`concepts/psychology/SKILL.md`](concepts/psychology/SKILL.md) | perception, attention, trust, manipulation limits | Phase 2, re-check at 11 |
-| [`concepts/type/SKILL.md`](concepts/type/SKILL.md) | `typography`, font loading, the wordmark's family | Phase 2 → 3 |
-| [`concepts/color/SKILL.md`](concepts/color/SKILL.md) | `color`, `semantic`, `contrastChecks`, dark remap | Phase 3 |
-| [`concepts/layout/SKILL.md`](concepts/layout/SKILL.md) | `spacing`, `radius`, `size`, component CSS | Phase 3 → 4 |
-| [`concepts/motion/SKILL.md`](concepts/motion/SKILL.md) | `motion`, reduced-motion behaviour | Phase 3 → 4 |
-| [`concepts/screens/SKILL.md`](concepts/screens/SKILL.md) | `directions.html` structures, `app.html` screens | Phase 4 |
-| [`concepts/logo/SKILL.md`](concepts/logo/SKILL.md) | `logo-icon.html`, `app-icons.mjs` | Phase 5 |
-| [`concepts/illustration/SKILL.md`](concepts/illustration/SKILL.md) | `illustrations.mjs` | Phase 6 |
-| [`concepts/voice/SKILL.md`](concepts/voice/SKILL.md) | screen copy, empty/error states, packs, landing copy | Phase 7 → 8 |
-| [`concepts/board/SKILL.md`](concepts/board/SKILL.md) | `store/design-board.html` | Phase 9 |
-
-Rule for all ten: they may add a constraint, never a second scale. If a concept file and `tokens.json` disagree, `tokens.json` wins and the concept file is wrong.
 
 ### Phase 3 — Tokens and the contrast gate
 Write `design/tokens.json` (W3C DTCG style): raw palette → semantic aliases → typography / spacing / radius / size / motion → `contrastChecks.pairs`.
@@ -154,6 +146,7 @@ Run all of it and paste the real output:
 node design/check-contrast.mjs
 node design/app-icons.mjs
 node design/illustrations.mjs
+node design/render-png.mjs design/illustrations/<name>.svg design/illustrations/<name>.png --width 960 --height 800
 node design/store/build/gen_store.py && bash design/store/build/render.sh
 ```
 Open `redesign/directions.html`, `redesign/app.html`, `redesign/landing.html`, `store/design-board.html`, `store/logo-icon.html` and check them at real device widths. Report what ran, what failed, and what is still hand-waved.

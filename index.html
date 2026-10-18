@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<title>design-storyboard — your app deserves a design folder</title>
-<meta name="description" content="An agent skill that interviews you about your app, then generates the whole design/ folder: storyboard, hi-fi mockups, landing page, logo, launcher icons, illustrations, content packs and every store asset — from one tokens file.">
+<title>design-storyboard - your app deserves a design folder</title>
+<meta name="description" content="An agent skill that interviews you about your app, then generates the whole design/ folder: storyboard, hi-fi mockups, landing page, logo, launcher icons, illustrations, content packs and every store asset - from one tokens file.">
 <link rel="canonical" href="https://design-storyboard.vercel.app/">
-<meta property="og:title" content="design-storyboard — your app deserves a design folder">
+<meta property="og:title" content="design-storyboard - your app deserves a design folder">
 <meta property="og:description" content="Storyboard, hi-fi mockups, landing page, logo, launcher icons, illustrations and a store kit. Generated from one tokens file.">
 <meta property="og:image" content="https://design-storyboard.vercel.app/og.png">
 <meta property="og:image:width" content="1200">
@@ -23,10 +23,10 @@
 
 <style>
   /* =====================================================================
-     BLOCK 1 — TOKENS
+     BLOCK 1 - TOKENS
      Mirrored from momo design/tokens.json (direction B, "Quiet luxury").
      No value here is invented. If one is missing, add it to the tokens
-     first and regenerate — do not type a new hex into this file.
+     first and regenerate - do not type a new hex into this file.
      ===================================================================== */
   :root{
     color-scheme: light;
@@ -75,7 +75,7 @@
   }
 
   /* =====================================================================
-     BLOCK 2 — PAGE
+     BLOCK 2 - PAGE
      ===================================================================== */
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -93,10 +93,10 @@
 
   .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
   .mono{font-family:var(--mono);font-size:.92em;letter-spacing:-.01em}
-  section{padding:clamp(72px,8.5vw,124px) 0}
+  section{padding:clamp(64px,6.6vw,98px) 0}
   .rule{border-top:1px solid var(--line)}
 
-  /* grid/flex children default to min-width:auto — let them shrink */
+  /* grid/flex children default to min-width:auto - let them shrink */
   .split>*,.folder-grid>*,.hero-grid>*,.install-grid>*,.cards>*,
   .gallery>*,.phase-grid>*,.principles>*{min-width:0}
 
@@ -120,7 +120,7 @@
   .eyebrow::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--rose);flex:none}
 
   /* =====================================================================
-     BLOCK 3 — NAV
+     BLOCK 3 - NAV
      ===================================================================== */
   .nav{
     position:sticky;top:0;z-index:50;
@@ -146,7 +146,7 @@
   @media (max-width:840px){ .nav-links a{display:none} }
 
   /* =====================================================================
-     BLOCK 4 — HERO
+     BLOCK 4 - HERO
      ===================================================================== */
   .hero{padding:clamp(52px,6vw,92px) 0 clamp(56px,6vw,86px)}
   .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(36px,5vw,70px);align-items:center}
@@ -174,11 +174,11 @@
   .hero-board{position:relative}
   /* the rose glow, once per page, behind the one important thing */
   .hero-board::before{
-    content:"";position:absolute;inset:-6% -10% -12% -6%;z-index:0;
+    content:"";position:absolute;inset:-2% -3% -8% -3%;z-index:0;
     background:
-      radial-gradient(58% 52% at 78% 18%, rgba(233,121,139,.42) 0%, transparent 68%),
-      radial-gradient(52% 46% at 12% 82%, rgba(124,34,54,.20) 0%, transparent 70%);
-    filter:blur(34px);
+      radial-gradient(58% 52% at 78% 18%, rgba(233,121,139,.30) 0%, transparent 68%),
+      radial-gradient(52% 46% at 12% 82%, rgba(124,34,54,.14) 0%, transparent 70%);
+    filter:blur(40px);
   }
   .board-card{
     position:relative;z-index:1;
@@ -210,6 +210,7 @@
   }
   .status{display:flex;justify-content:space-between;align-items:center;padding:7px 11px 0;font-size:6.5px;font-weight:600}
   .status .island{width:28px;height:8px;border-radius:999px;background:#000}
+  .status .batt{width:9px;height:4.5px;border-radius:1px;background:currentColor;opacity:.75}
   .s-body{flex:1;min-height:0;padding:9px 10px 0;display:flex;flex-direction:column}
   .gesture{height:3px;width:32%;margin:auto auto 6px;border-radius:2px;background:var(--ink);opacity:.7}
 
@@ -235,7 +236,7 @@
   .s-sign{font-family:var(--serif);font-style:italic;font-size:8px;color:var(--ink2);margin-top:8px}
 
   /* =====================================================================
-     BLOCK 5 — PROOF STRIP
+     BLOCK 5 - PROOF STRIP
      ===================================================================== */
   .proof{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:24px 0}
   .proof-inner{display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap}
@@ -243,7 +244,7 @@
   .proof-item b{font-family:var(--serif);font-size:21px;font-weight:400;color:var(--ink);letter-spacing:-.02em}
 
   /* =====================================================================
-     BLOCK 6 — THE RULE
+     BLOCK 6 - THE RULE
      ===================================================================== */
   .split{display:grid;grid-template-columns:.94fr 1.06fr;gap:clamp(34px,5.5vw,76px);align-items:start}
   .split.center{align-items:center}
@@ -262,7 +263,7 @@
   .gen-table tr:last-child td{border-bottom:0}
 
   /* =====================================================================
-     BLOCK 7 — FOLDER + ARTIFACTS
+     BLOCK 7 - FOLDER + ARTIFACTS
      ===================================================================== */
   .folder-grid{display:grid;grid-template-columns:.88fr 1.12fr;gap:clamp(30px,4.5vw,58px);align-items:start}
   @media (max-width:920px){ .folder-grid{grid-template-columns:1fr} }
@@ -283,7 +284,7 @@
   @media (max-width:640px){ .artifacts{grid-template-columns:1fr} .artifact:nth-last-child(2){border-bottom:1px solid var(--line)} }
 
   /* =====================================================================
-     BLOCK 8 — CONCEPT PACKS
+     BLOCK 8 - CONCEPT PACKS
      ===================================================================== */
   .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:42px}
   @media (max-width:900px){ .cards{grid-template-columns:1fr 1fr} }
@@ -300,7 +301,7 @@
   .card.wide{grid-column:span 1}
 
   /* =====================================================================
-     BLOCK 9 — WORKFLOW
+     BLOCK 9 - WORKFLOW
      ===================================================================== */
   .phase-grid{display:grid;grid-auto-flow:column;grid-template-rows:repeat(6,auto);grid-template-columns:1fr 1fr;
               gap:0 58px;margin-top:14px}
@@ -313,9 +314,9 @@
   }
 
   /* =====================================================================
-     BLOCK 10 — GENERATED COMPONENTS
+     BLOCK 10 - GENERATED COMPONENTS
      ===================================================================== */
-  .gallery{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:44px}
+  .gallery{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:44px;align-items:start}
   @media (max-width:860px){ .gallery{grid-template-columns:1fr} }
   .panel{background:var(--white);border-radius:var(--r-xl);padding:26px;box-shadow:var(--shadow-sm)}
   .panel-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:22px}
@@ -338,7 +339,7 @@
   .illus img{width:100%;max-width:132px;height:auto}
 
   /* =====================================================================
-     BLOCK 11 — LANDING CALLOUT
+     BLOCK 11 - LANDING CALLOUT
      ===================================================================== */
   .callout{background:var(--white);border-radius:var(--r-xl);padding:clamp(28px,4vw,48px);box-shadow:var(--shadow-sm)}
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
@@ -349,7 +350,7 @@
   .chip.accent{background:var(--blush);color:var(--rose-deep)}
 
   /* =====================================================================
-     BLOCK 12 — PRINCIPLES
+     BLOCK 12 - PRINCIPLES
      ===================================================================== */
   .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
   .principle{padding:0 30px;border-left:1px solid var(--line)}
@@ -363,7 +364,7 @@
   }
 
   /* =====================================================================
-     BLOCK 13 — INSTALL
+     BLOCK 13 - INSTALL
      ===================================================================== */
   .install-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px}
   @media (max-width:860px){ .install-grid{grid-template-columns:1fr} }
@@ -391,7 +392,7 @@
   .prompt-box .mono{font-family:var(--mono);font-size:12px;color:#F0909E}
 
   /* =====================================================================
-     BLOCK 14 — FAQ
+     BLOCK 14 - FAQ
      ===================================================================== */
   details{border-bottom:1px solid var(--line);padding:21px 0}
   details summary{
@@ -405,7 +406,7 @@
   details p code{font-family:var(--mono);font-size:12.5px;background:var(--soft);padding:1px 5px;border-radius:5px}
 
   /* =====================================================================
-     BLOCK 15 — FINAL + FOOTER
+     BLOCK 15 - FINAL + FOOTER
      ===================================================================== */
   .final{padding:clamp(80px,10vw,140px) 0;text-align:center}
   .final h2{max-width:16ch;margin:0 auto 20px}
@@ -423,7 +424,7 @@
   .foot-col a:hover{color:var(--ink)}
 
   /* =====================================================================
-     BLOCK 16 — MOTION
+     BLOCK 16 - MOTION
      ===================================================================== */
   .reveal{opacity:0;transform:translateY(14px);
           transition:opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1)}
@@ -435,7 +436,7 @@
   }
 
   /* =====================================================================
-     BLOCK 17 — SMALL SCREENS
+     BLOCK 17 - SMALL SCREENS
      ===================================================================== */
   @media (max-width:960px){
     .hero-grid{grid-template-columns:1fr;gap:52px}
@@ -483,7 +484,7 @@
         <h1>Your app deserves a <em>design folder</em>.</h1>
         <p class="lede">
           One conversation in. A storyboard, hi-fi mockups, a <b>landing page</b>, logo concepts,
-          launcher icons, illustrations, store screenshots — and a contrast gate that has to pass.
+          launcher icons, illustrations, store screenshots - and a contrast gate that has to pass.
           All generated from a single <b>tokens.json</b>, so nothing can drift.
         </p>
         <div class="hero-actions">
@@ -491,7 +492,7 @@
           <a class="btn ghost" href="#build">See what it builds</a>
         </div>
         <p class="hero-note">
-          Claude Code · Codex · OpenCode · Cursor — needs <b>Node</b> and <b>Chrome</b>. Nothing else.
+          Claude Code · Codex · OpenCode · Cursor - needs <b>Node</b> and <b>Chrome</b>. Nothing else.
         </p>
       </div>
 
@@ -507,7 +508,7 @@
             <!-- 01 · Today -->
             <figure class="shot">
               <div class="phone"><div class="screen s-glow">
-                <div class="status"><span>9:41</span><span class="island"></span><span>􀙇</span></div>
+                <div class="status"><span>9:41</span><span class="island"></span><span class="batt"></span></div>
                 <div class="s-body">
                   <div class="s-eb">Day 48 · today</div>
                   <div class="s-q">What do you think I <em style="color:#FFE3E8">misunderstand</em> about you?</div>
@@ -522,7 +523,7 @@
             <!-- 02 · Memories -->
             <figure class="shot">
               <div class="phone"><div class="screen">
-                <div class="status"><span>9:41</span><span class="island"></span><span>􀙇</span></div>
+                <div class="status"><span>9:41</span><span class="island"></span><span class="batt"></span></div>
                 <div class="s-body">
                   <div class="s-title">Memories</div>
                   <div class="s-grid">
@@ -541,11 +542,11 @@
             <!-- 03 · Letter -->
             <figure class="shot">
               <div class="phone"><div class="screen">
-                <div class="status"><span>9:41</span><span class="island"></span><span>􀙇</span></div>
+                <div class="status"><span>9:41</span><span class="island"></span><span class="batt"></span></div>
                 <div class="s-body">
                   <div class="s-eb" style="color:#8F8782">Sealed · opens in 6 days</div>
                   <div class="s-letter">“I keep the receipt<br>from the first night<br>in the blue tin.”</div>
-                  <div class="s-sign">— for you, in a week</div>
+                  <div class="s-sign"> - for you, in a week</div>
                   <div class="gesture"></div>
                 </div>
               </div></div>
@@ -582,7 +583,7 @@
         <h2>Nothing is <em>hand-drawn</em>.</h2>
         <p class="lede" style="margin-top:20px">
           A design folder that is drawn by hand rots the first time a colour changes. Here every
-          artifact is the output of a small script you can re-run — so the mockup, the icon, the
+          artifact is the output of a small script you can re-run - so the mockup, the icon, the
           landing page and the App Store screenshots can never disagree with each other.
         </p>
       </div>
@@ -638,7 +639,7 @@
       <div class="reveal">
         <div class="artifacts">
           <div class="artifact"><h4>Storyboard</h4><p>Every screen, grouped by job, each captioned with why it exists.</p></div>
-          <div class="artifact"><h4>Hi-fi mockups</h4><p>Real CSS, real type, in a device frame — not flattened images.</p></div>
+          <div class="artifact"><h4>Hi-fi mockups</h4><p>Real CSS, real type, in a device frame - not flattened images.</p></div>
           <div class="artifact"><h4>Directions</h4><p>Three type-and-colour systems on the same screens. You pick one.</p></div>
           <div class="artifact"><h4>Landing page</h4><p>Same tokens, objection-led sections, real metadata and an OG card.</p></div>
           <div class="artifact"><h4>Logo + wordmark</h4><p>Mark, wordmark and launcher icon, shown from 16 to 1024px.</p></div>
@@ -660,7 +661,7 @@
       <p class="eyebrow">Ten constraint files</p>
       <h2>Each decision has one owner.</h2>
       <p class="lede" style="margin-top:20px">
-        The skill ships ten short concept files. None of them is a chapter to paste onto the board —
+        The skill ships ten short concept files. None of them is a chapter to paste onto the board -
         each owns one slice of the tokens, or one artifact, and says which files it writes.
       </p>
     </div>
@@ -671,11 +672,11 @@
       <div class="card reveal"><div class="tag">concepts/color</div><h4>Color</h4><p>Palette, semantic aliases, accent reservation, and the contrast pairs that must pass.</p></div>
       <div class="card reveal"><div class="tag">concepts/layout</div><h4>Layout</h4><p>One spacing scale, one radius scale, and screens that consume both without inventing a third.</p></div>
       <div class="card reveal"><div class="tag">concepts/motion</div><h4>Motion</h4><p>Three durations, one easing family, and what reduced motion removes.</p></div>
-      <div class="card reveal"><div class="tag">concepts/screens</div><h4>Screens</h4><p>Three structures before the pick, then every state — including empty, error and offline.</p></div>
-      <div class="card reveal"><div class="tag">concepts/logo</div><h4>Logo</h4><p>Mark, wordmark, launcher icon — three decisions, in that order, tested at 16px.</p></div>
+      <div class="card reveal"><div class="tag">concepts/screens</div><h4>Screens</h4><p>Three structures before the pick, then every state - including empty, error and offline.</p></div>
+      <div class="card reveal"><div class="tag">concepts/logo</div><h4>Logo</h4><p>Mark, wordmark, launcher icon - three decisions, in that order, tested at 16px.</p></div>
       <div class="card reveal"><div class="tag">concepts/illustration</div><h4>Illustration</h4><p>The SVG ∩ VectorDrawable subset, so one file is genuinely one file.</p></div>
       <div class="card reveal"><div class="tag">concepts/voice</div><h4>Voice</h4><p>One vocabulary. Errors, empty states and the copy deck written as design material.</p></div>
-      <div class="card reveal" style="grid-column:1/-1" ><div class="tag">concepts/board</div><h4>Board</h4><p>The one-page review, assembled from the real tokens and the real assets — the page a founder forwards when someone asks “can I see the design?”</p></div>
+      <div class="card reveal" style="grid-column:1/-1" ><div class="tag">concepts/board</div><h4>Board</h4><p>The one-page review, assembled from the real tokens and the real assets - the page a founder forwards when someone asks “can I see the design?”</p></div>
     </div>
   </section>
 </div>
@@ -764,7 +765,7 @@
           <h2 style="font-size:clamp(27px,3.2vw,38px)">The landing page is part of the design system.</h2>
           <p class="lede" style="margin-top:18px;font-size:15.5px">
             A system that only works inside a 390px phone frame isn't a system. The marketing page is
-            built from the same CSS blocks and tokens as the app — so the site, the store listing and
+            built from the same CSS blocks and tokens as the app - so the site, the store listing and
             the product can't visibly wobble.
           </p>
         </div>
@@ -846,7 +847,7 @@ cp -R /tmp/ds/skills/design-storyboard ~/.agents/skills/</div>
         <p>No install, no repo access. Paste this into any agent that can write files.</p>
         <div class="prompt-box">
           <button class="copy" data-copy="Interview me about the app (promise, user, moment of use, platforms, must-nevers, competitors, existing brand assets), then ask for supporting materials. Then build the full design/ folder: 3 directions in directions.html, tokens.json plus a contrast checker that must pass, app.html as both storyboard and hi-fi mockup with a why on every screen, app-icons.mjs emitting iOS and Android launcher assets, a logo and wordmark review page, illustrations.mjs for empty states, content packs, a landing page on the same tokens with real metadata and an OG card, and a store pipeline that generates and headless-renders every App Store and Play size. Everything generated and re-runnable, nothing hand-drawn. Pause for sign-off after the directions and after the tokens, and paste real command output, never a claim.">copy</button>
-          <p>“Interview me about the app, then build the full <span class="mono">design/</span> folder: three directions, tokens plus a contrast gate, a storyboard, icons, illustrations, a landing page, content packs, and a store kit — all generated and re-runnable. Pause for sign-off after the directions and after the tokens, and paste real command output.”</p>
+          <p>“Interview me about the app, then build the full <span class="mono">design/</span> folder: three directions, tokens plus a contrast gate, a storyboard, icons, illustrations, a landing page, content packs, and a store kit - all generated and re-runnable. Pause for sign-off after the directions and after the tokens, and paste real command output.”</p>
         </div>
       </div>
     </div>
@@ -868,7 +869,7 @@ cp -R /tmp/ds/skills/design-storyboard ~/.agents/skills/</div>
         </details>
         <details>
           <summary>Do I need design experience?</summary>
-          <p>No, but you do need to answer the interview. The skill asks about the promise, the user, the moment of use and what the product must <em>never</em> do. If you skip that, you get a generic design — which is the failure mode this exists to avoid.</p>
+          <p>No, but you do need to answer the interview. The skill asks about the promise, the user, the moment of use and what the product must <em>never</em> do. If you skip that, you get a generic design - which is the failure mode this exists to avoid.</p>
         </details>
         <details>
           <summary>Does it work for iOS and Android?</summary>
@@ -876,7 +877,7 @@ cp -R /tmp/ds/skills/design-storyboard ~/.agents/skills/</div>
         </details>
         <details>
           <summary>What if I already have a brand?</summary>
-          <p>Bring it to the interview — logo, licensed typefaces, brand hexes. Phase 1 is explicitly about inventorying what's reusable before inventing anything. It won't replace a mark you already ship.</p>
+          <p>Bring it to the interview - logo, licensed typefaces, brand hexes. Phase 1 is explicitly about inventorying what's reusable before inventing anything. It won't replace a mark you already ship.</p>
         </details>
         <details>
           <summary>Why does it insist on a contrast checker?</summary>
@@ -888,7 +889,7 @@ cp -R /tmp/ds/skills/design-storyboard ~/.agents/skills/</div>
         </details>
         <details>
           <summary>Which agents can run it?</summary>
-          <p>Any agent that can read files and run Node: Claude Code, Codex, OpenCode, Cursor, Windsurf. The skill is just markdown plus three small scripts — there is no plugin API to depend on.</p>
+          <p>Any agent that can read files and run Node: Claude Code, Codex, OpenCode, Cursor, Windsurf. The skill is just markdown plus three small scripts - there is no plugin API to depend on.</p>
         </details>
       </div>
     </div>
@@ -900,7 +901,7 @@ cp -R /tmp/ds/skills/design-storyboard ~/.agents/skills/</div>
   <section class="final">
     <div class="reveal">
       <h2>Ship a <em>folder</em>, not a moodboard.</h2>
-      <p class="lede">Interview in. Storyboard, mockups, landing page, icons, illustrations and store kit out — all from one tokens file.</p>
+      <p class="lede">Interview in. Storyboard, mockups, landing page, icons, illustrations and store kit out - all from one tokens file.</p>
       <div class="hero-actions" style="justify-content:center">
         <a class="btn primary" href="https://github.com/shuence/design-storyboard">Install the skill <span class="arrow">→</span></a>
         <a class="btn ghost" href="#faq">Read the questions</a>
@@ -957,7 +958,7 @@ cp -R /tmp/ds/skills/design-storyboard ~/.agents/skills/</div>
 </script>
 
 <script>
-  // Copy buttons — real clipboard, real fallback, real feedback.
+  // Copy buttons - real clipboard, real fallback, real feedback.
   document.querySelectorAll('.copy').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var text = btn.getAttribute('data-copy') || '';
@@ -978,7 +979,7 @@ cp -R /tmp/ds/skills/design-storyboard ~/.agents/skills/</div>
     });
   });
 
-  // Reveal on scroll — skipped entirely when motion is reduced.
+  // Reveal on scroll - skipped entirely when motion is reduced.
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var items = document.querySelectorAll('.reveal');
   if (reduced || !('IntersectionObserver' in window)) {

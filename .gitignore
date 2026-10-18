@@ -6,3 +6,6 @@ node_modules/
 # but these scratch dirs are not
 .design-scratch/
 tmp/
+
+# scratch: launch prototypes, not shipped
+launch/_proto/

@@ -5,8 +5,8 @@ Why this is called `design-storyboard` rather than `foundry`, `atelier`, or `des
 ## Method (and its limits)
 
 There is no public download counter for agent skills. The closest available proxy was the
-install manifest on this machine — `~/.agents/.skill-lock.json` plus the Codex curated-skill
-cache — which records the upstream repository every installed skill came from.
+install manifest on this machine - `~/.agents/.skill-lock.json` plus the Codex curated-skill
+cache - which records the upstream repository every installed skill came from.
 
 Snapshot: **270 installed skills from 56 upstream repositories.** This measures what one
 well-stocked machine has accumulated, not global popularity. Treat it as a sample of the
@@ -59,7 +59,7 @@ Two observations:
 
 Also relevant: Codex's curated entries all pair an `id` with a `shortDescription` of roughly
 40–55 characters ("Build and scaffold ChatGPT apps"). Whatever the name, the one-liner is
-carried alongside it, so the name does not have to explain everything — but it should not
+carried alongside it, so the name does not have to explain everything - but it should not
 fight the one-liner either.
 
 ## The shortlist
@@ -83,7 +83,7 @@ fight the one-liner either.
 
 - It sits in the `design-*` family that already dominates installed design skills, so it is
   findable by the same instinct that searches for `design-tokens`.
-- "Storyboard" names the single most distinctive artifact — not another token file or icon
+- "Storyboard" names the single most distinctive artifact - not another token file or icon
   generator, but the board that shows every screen and *why it exists*. That is the thing this
   skill does that the others don't.
 - It pairs cleanly with the one-liner: *"An agent skill for people who ship apps."*
