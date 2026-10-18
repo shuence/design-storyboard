@@ -826,9 +826,15 @@
     </div>
 
     <div class="install-grid">
+      <div class="install-card reveal" style="grid-column:1/-1">
+        <h4>The one command</h4>
+        <p>Install it from the <span class="mono">skills.sh</span> registry - it wires the skill into every agent it finds.</p>
+        <div class="cmd"><button class="copy" data-copy="npx skills add shuence/design-storyboard">copy</button>npx skills add shuence/design-storyboard</div>
+      </div>
+
       <div class="install-card reveal">
         <h4>As a skill</h4>
-        <p>Clone it, then drop it where your agent looks for skills.</p>
+        <p>Or clone it, then drop it where your agent looks for skills.</p>
         <div class="cmd"><button class="copy" data-copy="git clone --depth 1 https://github.com/shuence/design-storyboard.git /tmp/ds && mkdir -p ~/.agents/skills && cp -R /tmp/ds/skills/design-storyboard ~/.agents/skills/">copy</button>git clone --depth 1 \
   https://github.com/shuence/design-storyboard.git /tmp/ds
 mkdir -p ~/.agents/skills

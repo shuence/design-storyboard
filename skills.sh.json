@@ -1,0 +1,27 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "The skill",
+      "description": "Build a whole design/ folder — storyboard, mockups, icons, landing page, store kit — from one tokens.json.",
+      "skills": ["design-storyboard"]
+    },
+    {
+      "title": "Concept packs",
+      "description": "One constraint file per slice of the design: perception, type, colour, layout, motion, screens, logo, illustration, voice.",
+      "skills": [
+        "design-concept-psychology",
+        "design-concept-type",
+        "design-concept-color",
+        "design-concept-layout",
+        "design-concept-motion",
+        "design-concept-screens",
+        "design-concept-logo",
+        "design-concept-illustration",
+        "design-concept-voice",
+        "design-concept-board"
+      ]
+    }
+  ]
+}

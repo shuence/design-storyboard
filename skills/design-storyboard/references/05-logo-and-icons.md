@@ -4,7 +4,7 @@ Three separate deliverables that people wrongly conflate. Do them in this order.
 
 ---
 
-## 1. Logo concepts — `store/logo-icon.html`
+## 1. Logo concepts - `store/logo-icon.html`
 
 Present **3–6 genuinely different marks** in one review page. "Different" means different *ideas*,
 not different corner radii:
@@ -31,7 +31,7 @@ centres offset `±d`. Formulas survive resizing, localisation and new variants; 
 
 ## 2. Wordmark
 
-Define it once, in `store/README.md`, as a table. There is exactly one wordmark — no secondary
+Define it once, in `store/README.md`, as a table. There is exactly one wordmark - no secondary
 lockup, no monogram, no outlined version. The moment there are two, they diverge.
 
 | Attribute | Decision to record |
@@ -44,7 +44,7 @@ lockup, no monogram, no outlined version. The moment there are two, they diverge
 | Ground | e.g. light grounds only |
 | Minimum size | in px, at which it is still legible |
 
-Then name the **source of truth** for it — the CSS rule and line in `landing.html` — so a change is
+Then name the **source of truth** for it - the CSS rule and line in `landing.html` - so a change is
 one edit, not a hunt.
 
 Everything downstream (store listings, landing page, app bars, email) must reference the table. If
@@ -73,12 +73,12 @@ Ship at least four, driven by one `variants` array:
 | `mono` | light ground | single-ink mark | the conservative / print-adjacent option |
 
 In-app appearance pickers should let the user choose. Preview thumbnails need **ordinary
-`.imageset`s**, not `.appiconset`s — app-icon renditions cannot be loaded with `UIImage(named:)`.
+`.imageset`s**, not `.appiconset`s - app-icon renditions cannot be loaded with `UIImage(named:)`.
 
 ### iOS
 - **Opaque.** App icons must not contain alpha. Rasterise with `magick -alpha off`; strip it, don't
   trust the source.
-- **Full-bleed 1024.** No rounded corners drawn by you — the OS masks it.
+- **Full-bleed 1024.** No rounded corners drawn by you - the OS masks it.
 - Ship `AppIcon.appiconset` with a single 1024 `universal` entry and let Xcode derive the rest.
 - `Contents.json` per set:
   ```json
@@ -88,7 +88,7 @@ In-app appearance pickers should let the user choose. Preview thumbnails need **
 
 ### Android
 - **Adaptive icon** = `<adaptive-icon>` with `<background>` + `<foreground>` + `<monochrome>`.
-- Layer is **108 dp**; keep the mark inside a centred **~66 dp circle** — that is the safe zone that
+- Layer is **108 dp**; keep the mark inside a centred **~66 dp circle** - that is the safe zone that
   survives circle, squircle and rounded-square masks. Draw the content in the middle two thirds and
   let the edges be background.
 - Emit the foreground as a **VectorDrawable** (`android:width/height/viewportWidth/viewportHeight`
@@ -96,7 +96,7 @@ In-app appearance pickers should let the user choose. Preview thumbnails need **
   ```
   M<cx>,<cy> m-<r>,0 a<r>,<r> 0,1 1,<2r>,0 a<r>,<r> 0,1 1,<-2r>,0
   ```
-- Colours come from `@color/*` resources, never inline hex — the theme and the icon must be able to
+- Colours come from `@color/*` resources, never inline hex - the theme and the icon must be able to
   move together.
 - Ship the `<monochrome>` layer as a real drawable; if you stub it, Android 13+ themed icons
   silently break.
@@ -121,6 +121,6 @@ In-app appearance pickers should let the user choose. Preview thumbnails need **
 | App Store icon | 1024 × 1024 | no alpha, flattened |
 | Android TV banner (if applicable) | 1280 × 720 | |
 
-These are rendered from the store artboard pipeline — see
-[`07-store-and-marketing.md`](07-store-and-marketing.md) — using the *same* generator output, so the
+These are rendered from the store artboard pipeline - see
+[`07-store-and-marketing.md`](07-store-and-marketing.md) - using the *same* generator output, so the
 icon on the listing is provably the icon in the app.

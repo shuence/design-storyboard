@@ -1,5 +1,7 @@
 # design-storyboard
 
+[![skills.sh](https://skills.sh/b/shuence/design-storyboard)](https://skills.sh/shuence/design-storyboard)
+
 **Your app deserves a design folder.**
 
 An agent skill that interviews you about your app, then generates the complete `design/` directory: a design storyboard, hi-fi HTML mockups, a launch landing page, logo concepts and wordmark, launcher icons for both platforms, illustrations, content packs, and every App Store / Play store asset.
@@ -42,7 +44,15 @@ If iOS and Android ever need separate hand edits, the generator is missing a rul
 
 ## Install
 
-**As a skill** - drop it where your agent looks for skills:
+**One command**, from the skills.sh registry:
+
+```bash
+npx skills add shuence/design-storyboard
+```
+
+That finds your agents and wires the skill into each one. `skills add` also lists it on [skills.sh](https://skills.sh/shuence/design-storyboard).
+
+**Or manually** - drop it where your agent looks for skills:
 
 ```bash
 git clone --depth 1 https://github.com/shuence/design-storyboard.git /tmp/ds
@@ -123,7 +133,7 @@ skills/design-storyboard/
     └── design-board.html       store review board skeleton
 ```
 
-The `assets/` scripts are real, runnable templates — not pseudocode. Point them at a `tokens.json` and they emit SVG, `.appiconset`, VectorDrawable, and `mipmap-anydpi` XML.
+The `assets/` scripts are real, runnable templates - not pseudocode. Point them at a `tokens.json` and they emit SVG, `.appiconset`, VectorDrawable, and `mipmap-anydpi` XML.
 
 `assets/generated/` holds the output used on the launch page: four launcher variants and four illustrations produced by those scripts, so the page shows real artifacts instead of drawings of artifacts.
 

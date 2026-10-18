@@ -6,7 +6,7 @@
 //   <androidRes>/drawable/<foreground>.xml                         (VectorDrawable)
 //   <androidRes>/mipmap-anydpi/<adaptive>.xml                      (adaptive icon)
 //
-// iOS PNGs are rasterized with ImageMagick (`magick`) and stripped of alpha — app icons must be opaque.
+// iOS PNGs are rasterized with ImageMagick (`magick`) and stripped of alpha - app icons must be opaque.
 // Android is a 108dp layer with a ~66dp circular safe zone.
 //
 // Run: node design/app-icons.mjs
@@ -17,7 +17,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 // ============================================================================
-// CONFIG — the only part that changes per app.
+// CONFIG - the only part that changes per app.
 // ============================================================================
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -66,7 +66,7 @@ const variants = [
 ];
 
 // ============================================================================
-// Generators — usually no change needed.
+// Generators - usually no change needed.
 // ============================================================================
 
 const svgFor = (v) => `<svg xmlns="http://www.w3.org/2000/svg" width="${SIZE}" height="${SIZE}" viewBox="0 0 ${SIZE} ${SIZE}">

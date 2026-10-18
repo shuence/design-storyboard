@@ -1,6 +1,6 @@
 ---
 name: design-concept-color
-description: Use when design-storyboard is choosing or drawing colour for a product's design folder — palettes, accents, dark mode, or color concepts.
+description: Use when design-storyboard is choosing or drawing colour for a product's design folder - palettes, accents, dark mode, or color concepts.
 ---
 
 # Color

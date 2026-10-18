@@ -55,7 +55,7 @@ automated gate in the design folder, so it must run in CI. Copy from
 
 ## `app-icons.mjs`
 Writes review SVGs **and** both platforms' launcher assets in one run. Never let a human
-re-export these by hand — the parity between iOS and Android is the whole point.
+re-export these by hand - the parity between iOS and Android is the whole point.
 
 ## `illustrations.mjs`
 Same pattern for spot art. Shares one palette and one geometry helper set with `app-icons.mjs`.
@@ -67,7 +67,7 @@ files, nothing missing.
 Licensed files, committed (or fetching instructions if the licence forbids redistribution). Record
 licence and subsetting. **Never** invent a variable-font axis or a weight the family doesn't ship.
 
-**Test:** open `redesign/app.html` offline — type must still render if fonts are local.
+**Test:** open `redesign/app.html` offline - type must still render if fonts are local.
 
 ## `question-packs/`
 The content deck. See [`08-content-packs.md`](08-content-packs.md).
@@ -113,7 +113,7 @@ Generates store artboard HTML plus `render.sh`. Structure to follow:
 `render.sh`. See [`07-store-and-marketing.md`](07-store-and-marketing.md).
 
 ## `store/{ios,android,marketing}/`
-Rendered PNGs, grouped by channel then device. Filenames are `NN-slug.png` and are ordered — store
+Rendered PNGs, grouped by channel then device. Filenames are `NN-slug.png` and are ordered - store
 listings are ordered, so the filenames should be too.
 
 ## `IMAGE_CREDITS.md`
@@ -125,7 +125,7 @@ Not a legal obligation for every source, but the difference between "we can swap
 
 ## Naming conventions
 - **Screens:** `NN-slug` where slug is a verb phrase from the user's side (`03-notes`, `07-privacy`).
-- **Icon variants:** bare tokens (`default`, `night`, `mono`, `rosewood`) — no brand prefix inside the file.
+- **Icon variants:** bare tokens (`default`, `night`, `mono`, `rosewood`) - no brand prefix inside the file.
 - **Illustrations:** `illustration_<moment>` (`illustration_paired`, `illustration_welcome`).
 - **Packs:** the pack id is the filename stem.
 - **No `.DS_Store`, no `__pycache__`, no `build/html/` in git.** Fix `.gitignore` once rather than

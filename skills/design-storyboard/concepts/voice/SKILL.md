@@ -5,7 +5,7 @@ description: Use when design-storyboard is writing product copy, empty states, e
 
 # Voice
 
-Copy is a material in the folder, not a layer you add later. It lives in the screens, the landing page, the store headlines, and — when the product shows a deck — `design/question-packs/`. Pack shape: [references/08-content-packs.md](../../references/08-content-packs.md).
+Copy is a material in the folder, not a layer you add later. It lives in the screens, the landing page, the store headlines, and - when the product shows a deck - `design/question-packs/`. Pack shape: [references/08-content-packs.md](../../references/08-content-packs.md).
 
 ## From the interview
 

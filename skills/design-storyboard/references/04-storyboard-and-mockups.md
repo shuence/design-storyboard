@@ -2,9 +2,9 @@
 
 `redesign/app.html` is one file that is three things at once:
 
-1. **The storyboard** — every screen in the product, grouped by user journey.
-2. **The hi-fi mockup** — real CSS, real tokens, real type; the visual source of truth.
-3. **The spec** — the component CSS in it is what gets ported to Compose and SwiftUI.
+1. **The storyboard** - every screen in the product, grouped by user journey.
+2. **The hi-fi mockup** - real CSS, real tokens, real type; the visual source of truth.
+3. **The spec** - the component CSS in it is what gets ported to Compose and SwiftUI.
 
 It beats Figma for this job because it is diffable, greppable, renders offline, and cannot silently
 drift from the tokens.
@@ -124,7 +124,7 @@ gesture indicator. Never invent a status bar the device doesn't have.
 ### Draw the states nobody wants to draw
 For each significant surface, include as applicable: empty, first-run, loading, error, offline,
 long content, long name, no permission, dark mode, one-handed. These are where the design system
-earns its keep — an empty state is the clearest proof the type scale and spacing work.
+earns its keep - an empty state is the clearest proof the type scale and spacing work.
 
 ### Use real content
 Real strings, real names in the mock data, realistic lengths. Lorem ipsum hides the two most common
@@ -144,7 +144,7 @@ then a one-character edit rather than a second design.
 
 ---
 
-## `directions.html` — the fork
+## `directions.html` - the fork
 
 Same three screens, three CSS scopes, side by side, each column labelled `A · Keepsake paper`
 `Fraunces + Hanken Grotesk`. Rules:
@@ -152,7 +152,7 @@ Same three screens, three CSS scopes, side by side, each column labelled `A · K
 - Directions must differ in **type pairing and colour logic**, not just hue. A/B/C that only change
   the accent are one direction.
 - Render the *same* screens in each, so the comparison is about the system.
-- Include the ugly one — a direction that only looks good on the welcome screen is not a direction.
+- Include the ugly one - a direction that only looks good on the welcome screen is not a direction.
 - Keep the file after choosing. It is the answer to "why isn't this Fraunces?".
 
 Sign-off question to ask a stakeholder: *"Which of these would you be happy to still be using in
@@ -160,7 +160,7 @@ three years?"*
 
 ---
 
-## `landing.html` — proof of the system
+## `landing.html` - proof of the system
 Build the marketing page in the same CSS blocks. If the landing page needs a font, colour or radius
 the app doesn't have, one of the two is wrong.
 
